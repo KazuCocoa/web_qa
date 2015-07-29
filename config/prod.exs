@@ -14,7 +14,7 @@ use Mix.Config
 config :web_qa, WebQa.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # ## SSL Support
@@ -50,5 +50,5 @@ config :logger, level: :info
 # Configure your database
 config :web_qa, WebQa.Repo,
   adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL")
+  url: System.get_env("DATABASE_URL"),
   size: 20 # The amount of database connections in the pool
