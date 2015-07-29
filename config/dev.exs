@@ -29,7 +29,7 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :web_qa, WebQa.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "qmfcjctgpgwgbz",
-  password: System.get_env("DB_PASS"),
-  database: "dbjai0nb1bi8db",
+  username: "postgres",
+  password: "postgres",
+  database: "web_qa_dev",
   size: 10 # The amount of database connections in the pool

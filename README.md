@@ -1,8 +1,22 @@
 # WebQa
 
-To start your new Phoenix application:
+WebQa application is used at webqa meeting.
+This web app works on https://web-qa.herokuapp.com/
+Allowd developer can deploy this repository on the above heroku.
 
-1. Install dependencies with `mix deps.get`
-2. Start Phoenix endpoint with `mix phoenix.server`
+# Development
+## Env
+- Erlang 18.0
+- Elixir 1.0.5
+    - read: `web_qa/blob/master/elixir_buildpack.config`
 
-Now you can visit `localhost:4000` from your browser.
+## Dev env
+- read: `web_qa/config/dev.exs`
+
+
+# Deployment
+- `git push heroku master`
+
+# LICENSE
+MIT.
+Read document of LICENSE if you would like to know more.
