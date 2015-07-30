@@ -1,0 +1,29 @@
+<h2>Show user</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+
+  <li>
+    <strong>Password:</strong>
+    <%= @user.password %>
+  </li>
+
+  <li>
+    <strong>Permission:</strong>
+    <%= @user.permission %>
+  </li>
+
+  <li>
+    <strong>Is deleted:</strong>
+    <%= @user.is_deleted %>
+  </li>
+
+</ul>
+
+
+<%= link "Edit", to: user_path(@conn, :edit, @user) %>
+<%= link "Back", to: user_path(@conn, :index) %>
