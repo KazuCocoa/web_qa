@@ -1,21 +1,19 @@
 defmodule WebQa.SessionController do
   use WebQa.Web, :controller
 
+  alias WebQa.User
+
   plug :scrub_params, "user" when action in [:create]
   plug :action
 
-  alias WebQa.User
+  def create(conn, %{"user" => user_params}) do
 
-  def create(conn, params = %{"user" => user_params}) do
-    changeset = User.create_changeset(%User{}, user_params)
+    user = Repo.get_by!(User, name: user_params)
 
-    if changeset.valid? do
-      user = Repo.insert(changeset)
-
+    if user do
       conn
       |> put_flash(:info, "Logged in.")
-      |> Guardian.Plug.sign_in(user, :password)
-      |> redirect(to: user_path(conn, :index))
+      |> Guardian.Plug.sign_in(user.name, :token)
     else
       redirect(conn, to: "/")
     end
@@ -24,6 +22,13 @@ defmodule WebQa.SessionController do
   def delete(conn, _params) do
     Guardian.Plug.sign_out(conn)
     |> put_flash(:info, "Logged out successfully.")
+    |> redirect(to: "/")
+  end
+
+  def show(conn, _params) do
+    token = Guardian.Plug.current_token(conn)
+
+    put_flash(conn, :info, "Token is #{token}")
     |> redirect(to: "/")
   end
 

@@ -30,5 +30,5 @@ config :guardian, Guardian,
   issuer: "WebQa",
   ttl: {30, :days},
   verify_issuer: true,
-  secret_key: "samplekey",
+  secret_key: "lksdjowiurowieurlkjsdlwwer",
   serializer: WebQa.GuardianSerializer

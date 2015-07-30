@@ -20,6 +20,7 @@ defmodule WebQa.Router do
   end
 
   scope "/", WebQa do
+    # pipe_through [:browser, :browser_session] # Use the default browser stack
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index

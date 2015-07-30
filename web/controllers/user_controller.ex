@@ -4,7 +4,7 @@ defmodule WebQa.UserController do
   alias WebQa.User
 
   plug :scrub_params, "user" when action in [:create, :update]
-#  plug Guardian.Plug.EnsureSession, %{ on_failure: { WebQa.SessionController, :new } } when not action in [:new, :create]
+  # plug Guardian.Plug.EnsureSession, %{ on_failure: { WebQa.SessionController, :create } } when not action in [:new, :create]
 
   def index(conn, _params) do
     users = Repo.all(User)
