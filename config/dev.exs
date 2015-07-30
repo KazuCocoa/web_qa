@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :web_qa, WebQa.Endpoint,
-  http: [port: {:system, "PORT"}],
+  http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   cache_static_lookup: false,
@@ -29,7 +29,7 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :web_qa, WebQa.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "phoenix_psql",
+  password: "phoenix",
   database: "web_qa_dev",
   size: 10 # The amount of database connections in the pool

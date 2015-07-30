@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :web_qa, WebQa.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "phoenix_psql",
+  password: "phoenix",
   database: "web_qa_test",
   pool: Ecto.Adapters.SQL.Sandbox, # Use a sandbox for transactional testing
   size: 1
