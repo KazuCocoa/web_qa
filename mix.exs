@@ -29,11 +29,14 @@ defmodule WebQa.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.15"},
-     {:phoenix_ecto, "~> 0.8"},
-     {:postgrex, ">= 0.8.4"},
-     {:phoenix_html, "~> 1.4"},
-     {:phoenix_live_reload, "~> 0.5", only: :dev},
-     {:cowboy, "~> 1.0"}]
+    [
+      {:phoenix, "~> 0.15"},
+      {:phoenix_ecto, "~> 0.8"},
+      {:postgrex, ">= 0.8.4"},
+      {:phoenix_html, "~> 1.4"},
+      {:phoenix_live_reload, "~> 0.5", only: :dev},
+      {:cowboy, "~> 1.0"},
+      {:guardian, "~> 0.4.0"}
+    ]
   end
 end

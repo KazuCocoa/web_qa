@@ -8,8 +8,15 @@ defmodule WebQa.Router do
     plug :protect_from_forgery
   end
 
+  pipeline :browser_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyAuthorization
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", WebQa do

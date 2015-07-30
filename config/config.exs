@@ -22,3 +22,13 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+# for guardian
+config :jokenm, config_module: Guardian.JWT
+
+config :guardian, Guardian,
+  issuer: "WebQa",
+  ttl: {30, :days},
+  verify_issuer: true,
+  secret_key: "samplekey",
+  serializer: WebQa.GuardianSerializer
