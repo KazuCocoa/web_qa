@@ -2,9 +2,12 @@ defmodule WebQa.UserController do
   use WebQa.Web, :controller
 
   alias WebQa.User
+  alias WebQa.SessionController
+
+  plug Guardian.Plug.EnsureSession, %{ on_failure: { SessionController, :new } } when not action in [:new, :create]
+  plug Guardian.Plug.EnsurePermissions, %{ on_failure: { __MODULE__, :forbidden }, default: [:write_profile] } when action in [:edit, :update]
 
   plug :scrub_params, "user" when action in [:create, :update]
-  # plug Guardian.Plug.EnsureSession, %{ on_failure: { WebQa.SessionController, :create } } when not action in [:new, :create]
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -12,57 +15,63 @@ defmodule WebQa.UserController do
   end
 
   def new(conn, _params) do
-    changeset = User.changeset(%User{})
+    changeset = User.create_changeset(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
-    changeset = User.changeset(%User{}, user_params)
+    changeset = User.create_changeset(%User{}, user_params)
 
-    case Repo.insert(changeset) do
-      {:ok, _user} ->
-        conn
-        |> put_flash(:info, "User created successfully.")
-        |> redirect(to: user_path(conn, :index))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+    if changeset.valid? do
+      user = Repo.insert(changeset)
+
+      conn
+      |> put_flash(:info, "User created successfully.")
+      |> Guardian.Plug.sign_in(user, :token, perms: %{ default: Guardian.Permissions.max })
+      |> redirect(to: user_path(conn, :index))
+    else
+      render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = Repo.get(User, id)
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
-    changeset = User.changeset(user)
+    user = Repo.get(User, id)
+    changeset = User.update_changeset(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get!(User, id)
-    changeset = User.changeset(user, user_params)
+    user = Repo.get(User, id)
+    changeset = User.update_changeset(user, user_params)
 
-    case Repo.update(changeset) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: user_path(conn, :show, user))
-      {:error, changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+    if changeset.valid? do
+      Repo.update(changeset)
+
+      conn
+      |> put_flash(:info, "User updated successfully.")
+      |> redirect(to: user_path(conn, :index))
+    else
+      render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(user)
+    user = Repo.get(User, id)
+    Repo.delete(user)
 
     conn
     |> put_flash(:info, "User deleted successfully.")
+    |> redirect(to: user_path(conn, :index))
+  end
+
+  def forbidden(conn, _) do
+    conn
+    |> put_flash(:error, "Forbidden")
     |> redirect(to: user_path(conn, :index))
   end
 end

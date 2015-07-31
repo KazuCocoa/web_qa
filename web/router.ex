@@ -15,19 +15,22 @@ defmodule WebQa.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Guardian.Plug.VerifyAuthorization
+    plug Guardian.Plug.VerifyAuthorization, realm: "Bearer"
     plug Guardian.Plug.LoadResource
   end
 
   scope "/", WebQa do
-    # pipe_through [:browser, :browser_session] # Use the default browser stack
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :browser_session] # Use the default browser stack
 
     get "/", PageController, :index
 
+    get "/login", SessionController, :new, as: :login
+    post "/login", SessionController, :create, as: :login
+    delete "/logout", SessionController, :delete, as: :logout
+    get "/logout", SessionController, :delete, as: :logout
+
     resources "/users", UserController
   end
-
   # Other scopes may use custom stacks.
   # scope "/api", WebQa do
   #   pipe_through :api

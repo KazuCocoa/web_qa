@@ -14,7 +14,15 @@
   <body>
     <div class="container" role="main">
       <div class="header">
-        Hello
+        <ul class="nav nav-pills pull-right">
+          <%= if Guardian.Plug.current_resource(@conn) do %>
+            <li><%= Guardian.Plug.current_resource(@conn).email %></li>
+            <li><%= link("Logout", to: logout_path(@conn, :delete), method: :delete) %></li>
+          <% else %>
+            <li><%= link("Signup", to: user_path(@conn, :new)) %></li>
+            <li><%= link("Login", to: login_path(@conn, :create)) %></li>
+          <% end %>
+        </ul>
         <span class="logo"></span>
       </div>
 
@@ -25,8 +33,26 @@
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-
     <script>require("web/static/js/app")</script>
 
+    <hr>
+    <br>
+    <div class='panel panel-default col-sm-6' id='guardian-data'>
+      <div class='panel-heading'><h4>Guardian Data</h4></div>
+      <dl class='dl-horizontal'>
+        <dt>Claims</dt>
+        <dd><%= inspect(Guardian.Plug.claims(@conn)) %></dd>
+        <dt>Token</dt>
+        <dd><%= inspect(Guardian.Plug.current_token(@conn)) %></dd>
+        <dt>Resource</dt>
+        <dd><%= inspect(Guardian.Plug.current_resource(@conn)) %></dd>
+      </dl>
+    </div>
+
+    <div class='panel panel-default col-sm-6'>
+      <div class='panel-heading'><h4>Pings</h4></div>
+      <ul class='list-unstyled' id='ping-output'></ul>
+      </dl>
+    </div>
   </body>
 </html>

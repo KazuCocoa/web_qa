@@ -2,20 +2,30 @@ defmodule WebQa.SessionController do
   use WebQa.Web, :controller
 
   alias WebQa.User
+  alias WebQa.UserQuery
 
   plug :scrub_params, "user" when action in [:create]
-  plug :action
 
-  def create(conn, %{"user" => user_params}) do
+  def new(conn, params) do
+    changeset = User.login_changeset(%User{})
+    render(conn, WebQa.SessionView, "new.html", changeset: changeset)
+  end
 
-    user = Repo.get_by!(User, name: user_params)
-
+  def create(conn, params = %{}) do
+    user = Repo.one(UserQuery.by_email(params["user"]["email"] || ""))
     if user do
-      conn
-      |> put_flash(:info, "Logged in.")
-      |> Guardian.Plug.sign_in(user.name, :token)
+      changeset = User.login_changeset(user, params["user"])
+      if changeset.valid? do
+        conn
+        |> put_flash(:info, "Logged in.")
+        |> Guardian.Plug.sign_in(user, :token, perms: %{ default: Guardian.Permissions.max })
+        |> redirect(to: user_path(conn, :index))
+      else
+        render(conn, "new.html", changeset: changeset)
+      end
     else
-      redirect(conn, to: "/")
+      changeset = User.login_changeset(%User{}) |> Ecto.Changeset.add_error(:login, "not found")
+      render(conn, "new.html", changeset: changeset)
     end
   end
 
@@ -25,11 +35,18 @@ defmodule WebQa.SessionController do
     |> redirect(to: "/")
   end
 
-  def show(conn, _params) do
-    token = Guardian.Plug.current_token(conn)
-
-    put_flash(conn, :info, "Token is #{token}")
-    |> redirect(to: "/")
+  def unauthenticated_api(conn, _params) do
+    the_conn = put_status(conn, 401)
+    case Guardian.Plug.claims(conn) do
+      { :error, :no_session } -> json(the_conn, %{ error: "Login required" })
+      { :error, reason } -> json(the_conn, %{ error: reason })
+      _ -> json(the_conn, %{ error: "Login required" })
+    end
   end
 
+  def forbidden_api(conn, _) do
+    conn
+    |> put_status(403)
+    |> json(%{ error: :forbidden })
+  end
 end

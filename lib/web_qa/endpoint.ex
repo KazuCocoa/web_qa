@@ -32,5 +32,5 @@ defmodule WebQa.Endpoint do
     key: "_web_qa_key",
     signing_salt: "v/KtveVN"
 
-  plug :router, WebQa.Router
+  plug WebQa.Router
 end

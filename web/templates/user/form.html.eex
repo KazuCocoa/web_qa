@@ -16,6 +16,11 @@
   </div>
 
   <div class="form-group">
+    <label>Email</label>
+    <%= text_input f, :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :password, "Password" %>
     <%= text_input f, :password, class: "form-control" %>
   </div>

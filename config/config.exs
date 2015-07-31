@@ -24,11 +24,14 @@ config :logger, :console,
 import_config "#{Mix.env}.exs"
 
 # for guardian
-config :jokenm, config_module: Guardian.JWT
+config :joken, config_module: Guardian.JWT
 
 config :guardian, Guardian,
   issuer: "WebQa",
-  ttl: {30, :days},
+  ttl: { 30, :days },
   verify_issuer: true,
-  secret_key: "lksdjowiurowieurlkjsdlwwer",
-  serializer: WebQa.GuardianSerializer
+  secret_key: "EPROIUELKJSDOIUEWORIJWLEKJFSODIojwoeirjsldkfjwoerijowkjflsef",
+  serializer: WebQa.GuardianSerializer,
+  permissions: %{
+    default: [:read_profile, :write_profile]
+  }

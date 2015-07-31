@@ -18,7 +18,7 @@ defmodule WebQa.Mixfile do
   def application do
     [mod: {WebQa, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :comeonin]]
   end
 
   # Specifies which paths to compile per environment
@@ -30,6 +30,7 @@ defmodule WebQa.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [
+      {:comeonin, "~>1.0.5"},
       {:phoenix, "~> 0.15"},
       {:phoenix_ecto, "~> 0.8"},
       {:postgrex, ">= 0.8.4"},
