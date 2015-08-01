@@ -31,6 +31,7 @@ defmodule WebQa.Router do
     resources "/users", UserController
 
     # TODO: Deny access who have no session.
+    # get "/votes", VoteController, :index # Only admin can see count of voting.
     # get "/votes/:id/edit", VoteController, :edit
     # get "/votes/new", VoteController, :new
     # post"/votes", VoteController, :create
