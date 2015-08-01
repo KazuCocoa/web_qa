@@ -17,6 +17,8 @@ defmodule WebQa.User do
   @required_fields ~w(name email password)
   @optional_fields ~w(is_deleted permission)
 
+  @login_field ~w(email password)
+
   before_insert :maybe_update_password
   before_update :maybe_update_password
 
@@ -28,20 +30,20 @@ defmodule WebQa.User do
   def create_changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields)
-    |> validate_unique(:email, on: Repo)
+    |> validate_unique(:email, [on: Repo, message: "Already anyone use same email."])
   end
 
   def update_changeset(model, params \\ :empty) do
     model
     |> cast(params, ~w(), @required_fields)
-    |> validate_unique(:email, on: Repo)
+    |> validate_unique(:email, [on: Repo, message: "Already anyone use same email."])
   end
 
-  def login_changeset(model), do: model |> cast(%{}, ~w(), ~w(email password))
+  def login_changeset(model), do: model |> cast(%{}, ~w(), @login_field)
 
   def login_changeset(model, params) do
     model
-    |> cast(params, ~w(email password), ~w())
+    |> cast(params, @login_field, ~w())
     |> validate_password
   end
 

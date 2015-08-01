@@ -23,7 +23,7 @@ defmodule WebQa.UserController do
     changeset = User.create_changeset(%User{}, user_params)
 
     if changeset.valid? do
-      user = Repo.insert(changeset)
+      user = Repo.insert!(changeset)
 
       conn
       |> put_flash(:info, "User created successfully.")
@@ -35,34 +35,35 @@ defmodule WebQa.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
+    user = Repo.get!(User, id)
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
+    user = Repo.get!(User, id)
     changeset = User.update_changeset(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get(User, id)
+    user = Repo.get!(User, id)
     changeset = User.update_changeset(user, user_params)
 
     if changeset.valid? do
-      Repo.update(changeset)
+      Repo.update!(changeset)
 
       conn
       |> put_flash(:info, "User updated successfully.")
       |> redirect(to: user_path(conn, :index))
     else
-      render(conn, "edit.html", user: user, changeset: changeset)
+      put_flash(conn, :error, "failed to update")
+      |> render("edit.html", user: user, changeset: changeset)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
-    Repo.delete(user)
+    user = Repo.get!(User, id)
+    Repo.delete!(user)
 
     conn
     |> put_flash(:info, "User deleted successfully.")
