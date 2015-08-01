@@ -22,7 +22,6 @@ defmodule WebQa.Router do
   scope "/", WebQa do
     pipe_through [:browser, :browser_session] # Use the default browser stack
 
-    get "/", PageController, :index
 
     get "/login", SessionController, :new, as: :login
     post "/login", SessionController, :create, as: :login
@@ -30,7 +29,28 @@ defmodule WebQa.Router do
     get "/logout", SessionController, :delete, as: :logout
 
     resources "/users", UserController
+
+    # TODO: Deny access who have no session.
+    # get "/votes/:id/edit", VoteController, :edit
+    # get "/votes/new", VoteController, :new
+    # post"/votes", VoteController, :create
+    # delete "/votes/:id", VoteController, :delete
+
   end
+
+  scope "/", WebQa do
+    pipe_through [:browser]
+
+    get "/", PageController, :index
+
+    resources "/votes", VoteController
+    # TODO: Allow access all users
+    # get "/votes", VoteController, :index
+    # get "/votes/:id", VoteController, :show
+    # patch "/votes/:id", VoteController, :update
+    # put "/votes/:id", VoteController, :update
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", WebQa do
   #   pipe_through :api

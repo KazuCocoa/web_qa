@@ -10,7 +10,7 @@ defmodule WebQa.UserControllerTest do
     {:ok, conn: conn}
   end
 
-  test "lists all entries on index", %{conn: conn} do
+  test "Display login page on index", %{conn: conn} do
     conn = get conn, user_path(conn, :index)
     assert html_response(conn, 200) =~ "Login"
   end

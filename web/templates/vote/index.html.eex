@@ -1,0 +1,30 @@
+<h2>Listing votes</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Question num</th>
+      <th>User</th>
+      <th>Count</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for vote <- @votes do %>
+    <tr>
+      <td><%= vote.question_num %></td>
+      <td><%= vote.user %></td>
+      <td><%= vote.count %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: vote_path(@conn, :show, vote), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: vote_path(@conn, :edit, vote), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: vote_path(@conn, :delete, vote), method: :delete, class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New vote", to: vote_path(@conn, :new) %>
