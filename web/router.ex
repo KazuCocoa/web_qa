@@ -48,6 +48,7 @@ defmodule WebQa.Router do
     # TODO: Allow access all users
     # get "/votes", VoteController, :index
     # get "/votes/:id", VoteController, :show
+    post "/votes/:id/vote", VoteController, :countup_vote
     # patch "/votes/:id", VoteController, :update
     # put "/votes/:id", VoteController, :update
   end

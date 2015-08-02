@@ -1,6 +1,8 @@
 defmodule WebQa.Vote do
   use WebQa.Web, :model
 
+  alias WebQa.Repo
+
   schema "votes" do
     field :question_num, :integer
     field :user, :string
@@ -21,5 +23,9 @@ defmodule WebQa.Vote do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def countup(model) do
+    Repo.update! %{model | count: model.count + 1}
   end
 end

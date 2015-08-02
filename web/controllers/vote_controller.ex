@@ -10,6 +10,14 @@ defmodule WebQa.VoteController do
     render(conn, "index.html", votes: votes)
   end
 
+  def countup_vote(conn, %{"id" => id}) do
+    vote = Repo.get!(Vote, id)
+           |> Vote.countup
+    conn
+    |> put_flash(:info, "Voting to #{vote.user} successfuly")
+    |> redirect(to: vote_path(conn, :index))
+  end
+
   def new(conn, _params) do
     changeset = Vote.changeset(%Vote{})
     render(conn, "new.html", changeset: changeset)
@@ -64,4 +72,5 @@ defmodule WebQa.VoteController do
     |> put_flash(:info, "Vote deleted successfully.")
     |> redirect(to: vote_path(conn, :index))
   end
+
 end
