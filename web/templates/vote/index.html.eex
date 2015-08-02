@@ -5,8 +5,9 @@
     <tr>
       <th>Question num</th>
       <th>User</th>
-      <th>Count</th>
-
+      <%= if Guardian.Plug.current_resource(@conn) do %>
+        <th>Count</th>
+      <% end %>
       <th></th>
     </tr>
   </thead>
@@ -15,7 +16,9 @@
     <tr>
       <td><%= vote.question_num %></td>
       <td><%= vote.user %></td>
-      <td><%= vote.count %></td>
+      <%= if Guardian.Plug.current_resource(@conn) do %>
+        <td><%= vote.count %></td>
+      <% end %>
 
       <td class="text-right">
         <%= button("Vote", to: vote_path(@conn, :countup_vote, vote), method: "post", class: "btn btn-default btn-xs") %>
