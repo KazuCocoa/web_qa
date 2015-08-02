@@ -1,7 +1,10 @@
 # WebQa
 
-WebQa application is used at webqa meeting.
-This web app works on https://web-qa.herokuapp.com/
+WebQa application is a web site for Web Service QA Meeting.
+The meeting is hold in Japan.
+And first web site about the meeting is [here](https://peraichi.com/landing_pages/view/webqa).
+
+This web app works on https://web-qa.herokuapp.com/ .
 Allowd developer can deploy this repository on the above heroku.
 
 
