@@ -2,6 +2,10 @@ defmodule WebQa.VoteController do
   use WebQa.Web, :controller
 
   alias WebQa.Vote
+  alias WebQa.SessionController
+
+  plug Guardian.Plug.EnsureSession, %{ on_failure: { SessionController, :new } } when not action in [:index]
+  plug Guardian.Plug.EnsurePermissions, %{ on_failure: { __MODULE__, :forbidden }, default: [:write_profile] } when action in [:new, :create, :edit, :update]
 
   plug :scrub_params, "vote" when action in [:create, :update]
 

@@ -40,7 +40,7 @@ defmodule WebQa.Router do
   end
 
   scope "/", WebQa do
-    pipe_through [:browser]
+    pipe_through [:browser, :browser_session]
 
     get "/", PageController, :index
 
