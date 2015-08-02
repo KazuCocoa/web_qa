@@ -20,10 +20,11 @@ Allowd developer can deploy this repository on the above heroku.
 
 ## Dev env
 - read: `web_qa/config/dev.exs`
-
+- `$ mix phoenix.server`
+    - or `$ iex -S mix phoenix.server`
 
 # Deployment
-- `git push heroku master`
+- `$ git push heroku master`
 
 # LICENSE
 MIT.
