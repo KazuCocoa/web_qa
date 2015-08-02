@@ -1,7 +1,7 @@
-defmodule WebQa.Vote do
-  use WebQa.Web, :model
+defmodule WebQaVote.Vote do
+  use WebQaVote.Web, :model
 
-  alias WebQa.Repo
+  alias WebQaVote.Repo
 
   schema "votes" do
     field :question_num, :integer

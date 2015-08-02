@@ -1,12 +1,12 @@
-defmodule WebQa.Web do
+defmodule WebQaVote.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use WebQa.Web, :controller
-      use WebQa.Web, :view
+      use WebQaVote.Web, :controller
+      use WebQaVote.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -27,12 +27,12 @@ defmodule WebQa.Web do
       use Phoenix.Controller
 
       # Alias the data repository and import query/model functions
-      alias WebQa.Repo
+      alias WebQaVote.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router
-      import WebQa.Router.Helpers
+      import WebQaVote.Router.Helpers
     end
   end
 
@@ -44,7 +44,7 @@ defmodule WebQa.Web do
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
 
       # Import URL helpers from the router
-      import WebQa.Router.Helpers
+      import WebQaVote.Router.Helpers
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -62,7 +62,7 @@ defmodule WebQa.Web do
       use Phoenix.Channel
 
       # Alias the data repository and import query/model functions
-      alias WebQa.Repo
+      alias WebQaVote.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 

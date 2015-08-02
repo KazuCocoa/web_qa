@@ -1,12 +1,12 @@
-defmodule WebQa.Endpoint do
-  use Phoenix.Endpoint, otp_app: :web_qa
+defmodule WebQaVote.Endpoint do
+  use Phoenix.Endpoint, otp_app: :web_qa_vote
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :web_qa, gzip: false,
+    at: "/", from: :web_qa_vote, gzip: false,
     only: ~w(css images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -29,8 +29,8 @@ defmodule WebQa.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_web_qa_key",
+    key: "_web_qa_vote_key",
     signing_salt: "v/KtveVN"
 
-  plug WebQa.Router
+  plug WebQaVote.Router
 end

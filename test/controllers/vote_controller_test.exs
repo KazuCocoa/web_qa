@@ -1,7 +1,7 @@
-defmodule WebQa.VoteControllerTest do
-  use WebQa.ConnCase
+defmodule WebQaVote.VoteControllerTest do
+  use WebQaVote.ConnCase
 
-  alias WebQa.Vote
+  alias WebQaVote.Vote
   @valid_attrs %{count: 42, question_num: 42, user: "some content"}
   @invalid_attrs %{}
 

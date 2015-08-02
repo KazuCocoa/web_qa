@@ -1,14 +1,14 @@
-defmodule WebQa.SessionController do
-  use WebQa.Web, :controller
+defmodule WebQaVote.SessionController do
+  use WebQaVote.Web, :controller
 
-  alias WebQa.User
-  alias WebQa.UserQuery
+  alias WebQaVote.User
+  alias WebQaVote.UserQuery
 
   plug :scrub_params, "user" when action in [:create]
 
   def new(conn, params) do
     changeset = User.login_changeset(%User{})
-    render(conn, WebQa.SessionView, "new.html", changeset: changeset)
+    render(conn, WebQaVote.SessionView, "new.html", changeset: changeset)
   end
 
   def create(conn, params = %{}) do

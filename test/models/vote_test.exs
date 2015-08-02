@@ -1,8 +1,8 @@
-defmodule WebQa.VoteTest do
-  use WebQa.ModelCase
+defmodule WebQaVote.VoteTest do
+  use WebQaVote.ModelCase
 
-  alias WebQa.Vote
-  alias WebQa.Repo
+  alias WebQaVote.Vote
+  alias WebQaVote.Repo
 
   @valid_attrs %{count: 42, question_num: 42, user: "some content"}
   @invalid_attrs %{}

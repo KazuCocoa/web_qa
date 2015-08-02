@@ -1,4 +1,4 @@
-defmodule WebQa.ConnCase do
+defmodule WebQaVote.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -21,21 +21,21 @@ defmodule WebQa.ConnCase do
       use Phoenix.ConnTest
 
       # Alias the data repository and import query/model functions
-      alias WebQa.Repo
+      alias WebQaVote.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router
-      import WebQa.Router.Helpers
+      import WebQaVote.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint WebQa.Endpoint
+      @endpoint WebQaVote.Endpoint
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(WebQa.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(WebQaVote.Repo, [])
     end
 
     :ok

@@ -1,3 +1,3 @@
-defmodule WebQa.PageViewTest do
-  use WebQa.ConnCase, async: true
+defmodule WebQaVote.PageViewTest do
+  use WebQaVote.ConnCase, async: true
 end

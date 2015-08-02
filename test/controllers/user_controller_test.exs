@@ -1,7 +1,7 @@
-defmodule WebQa.UserControllerTest do
-  use WebQa.ConnCase
+defmodule WebQaVote.UserControllerTest do
+  use WebQaVote.ConnCase
 
-  alias WebQa.User
+  alias WebQaVote.User
   @valid_attrs %{is_deleted: true, email: "m@example.com", name: "some content", password: "some content", permission: 1}
   @invalid_attrs %{}
 

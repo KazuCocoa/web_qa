@@ -1,5 +1,5 @@
-defmodule WebQa.ErrorView do
-  use WebQa.Web, :view
+defmodule WebQaVote.ErrorView do
+  use WebQaVote.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

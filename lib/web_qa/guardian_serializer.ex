@@ -1,8 +1,8 @@
-defmodule WebQa.GuardianSerializer do
+defmodule WebQaVote.GuardianSerializer do
   @behaviour Guardian.Serializer
 
-  alias WebQa.Repo
-  alias WebQa.User
+  alias WebQaVote.Repo
+  alias WebQaVote.User
 
   def for_token(user = %User{}), do: { :ok, "User:#{user.id}" }
   def for_token(_), do: { :error, "Unknown resource type" }

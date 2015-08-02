@@ -1,4 +1,4 @@
-defmodule WebQa.ModelCase do
+defmodule WebQaVote.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -17,16 +17,16 @@ defmodule WebQa.ModelCase do
   using do
     quote do
       # Alias the data repository and import query/model functions
-      alias WebQa.Repo
+      alias WebQaVote.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
-      import WebQa.ModelCase
+      import WebQaVote.ModelCase
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(WebQa.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(WebQaVote.Repo, [])
     end
 
     :ok

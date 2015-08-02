@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :web_qa, WebQa.Endpoint,
+config :web_qa_vote, WebQaVote.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "5P+jBjV/Tg7Ty5Ip8CSgufyY1qIv3/iuirP353LK2T7Kq5yqT3vgNrlhxlY3YLuK",
   render_errors: [default_format: "html"],
-  pubsub: [name: WebQa.PubSub,
+  pubsub: [name: WebQaVote.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -27,11 +27,11 @@ import_config "#{Mix.env}.exs"
 config :joken, config_module: Guardian.JWT
 
 config :guardian, Guardian,
-  issuer: "WebQa",
+  issuer: "WebQaVote",
   ttl: { 30, :days },
   verify_issuer: true,
   secret_key: "EPROIUELKJSDOIUEWORIJWLEKJFSODIojwoeirjsldkfjwoerijowkjflsef",
-  serializer: WebQa.GuardianSerializer,
+  serializer: WebQaVote.GuardianSerializer,
   permissions: %{
     default: [:read_profile, :write_profile]
   }

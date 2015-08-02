@@ -1,12 +1,10 @@
-# WebQa
+**This repository is unofficial**
 
-WebQa application is a web site for Web Service QA Meeting.
-The meeting is hold in Japan.
-And first web site about the meeting is [here](https://peraichi.com/landing_pages/view/webqa).
+# WebQaVote
+WebQaVote is voting system against meetups.
 
 This web app works on https://web-qa.herokuapp.com/ .
-Allowd developer can deploy this repository on the above heroku.
-
+Allowed developer can deploy this repository on the above heroku.
 
 # Feature
 
@@ -19,10 +17,10 @@ Allowd developer can deploy this repository on the above heroku.
 ## Env
 - Erlang 18.0
 - Elixir 1.0.5
-    - read: `web_qa/blob/master/elixir_buildpack.config`
+    - read: `web_qa_vote/blob/master/elixir_buildpack.config`
 
 ## Dev env
-- read: `web_qa/config/dev.exs`
+- read: `web_qa_vote/config/dev.exs`
 - `$ mix phoenix.server`
     - or `$ iex -S mix phoenix.server`
 

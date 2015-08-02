@@ -1,6 +1,6 @@
-defmodule WebQa.UserQuery do
+defmodule WebQaVote.UserQuery do
   import Ecto.Query
-  alias WebQa.User
+  alias WebQaVote.User
 
   def by_email(email) do
     from u in User, where: u.email == ^email

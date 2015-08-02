@@ -1,7 +1,7 @@
-defmodule WebQa.UserTest do
-  use WebQa.ModelCase
+defmodule WebQaVote.UserTest do
+  use WebQaVote.ModelCase
 
-  alias WebQa.User
+  alias WebQaVote.User
 
   @valid_attrs %{is_deleted: false, encrypted_password: "encrypted_pass", email: "m@example.com", name: "some content", password: "some content", permission: 1}
   @invalid_attrs %{}

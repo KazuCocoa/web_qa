@@ -1,7 +1,7 @@
-defmodule WebQa.User do
-  use WebQa.Web, :model
+defmodule WebQaVote.User do
+  use WebQaVote.Web, :model
 
-  alias WebQa.Repo
+  alias WebQaVote.Repo
 
   schema "users" do
     field :name, :string

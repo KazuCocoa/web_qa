@@ -1,4 +1,4 @@
-defmodule WebQa.Repo.Migrations.CreateVote do
+defmodule WebQaVote.Repo.Migrations.CreateVote do
   use Ecto.Migration
 
   def change do

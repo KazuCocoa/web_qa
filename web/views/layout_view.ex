@@ -1,3 +1,3 @@
-defmodule WebQa.LayoutView do
-  use WebQa.Web, :view
+defmodule WebQaVote.LayoutView do
+  use WebQaVote.Web, :view
 end

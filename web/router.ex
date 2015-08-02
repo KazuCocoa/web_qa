@@ -1,5 +1,5 @@
-defmodule WebQa.Router do
-  use WebQa.Web, :router
+defmodule WebQaVote.Router do
+  use WebQaVote.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -19,7 +19,7 @@ defmodule WebQa.Router do
     plug Guardian.Plug.LoadResource
   end
 
-  scope "/", WebQa do
+  scope "/", WebQaVote do
     pipe_through [:browser, :browser_session] # Use the default browser stack
 
     get "/", PageController, :index
@@ -37,7 +37,7 @@ defmodule WebQa.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", WebQa do
+  # scope "/api", WebQaVote do
   #   pipe_through :api
   # end
 end

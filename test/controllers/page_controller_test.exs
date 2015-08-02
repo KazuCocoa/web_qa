@@ -1,5 +1,5 @@
-defmodule WebQa.PageControllerTest do
-  use WebQa.ConnCase
+defmodule WebQaVote.PageControllerTest do
+  use WebQaVote.ConnCase
 
   test "GET /" do
     conn = get conn(), "/"

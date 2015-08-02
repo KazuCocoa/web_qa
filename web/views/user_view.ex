@@ -1,3 +1,3 @@
-defmodule WebQa.UserView do
-  use WebQa.Web, :view
+defmodule WebQaVote.UserView do
+  use WebQaVote.Web, :view
 end

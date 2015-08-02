@@ -1,4 +1,4 @@
-defmodule WebQa.ChannelCase do
+defmodule WebQaVote.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,19 +21,19 @@ defmodule WebQa.ChannelCase do
       use Phoenix.ChannelTest
 
       # Alias the data repository and import query/model functions
-      alias WebQa.Repo
+      alias WebQaVote.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
 
       # The default endpoint for testing
-      @endpoint WebQa.Endpoint
+      @endpoint WebQaVote.Endpoint
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(WebQa.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(WebQaVote.Repo, [])
     end
 
     :ok

@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :web_qa, WebQa.Endpoint,
+config :web_qa_vote, WebQaVote.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -14,7 +14,7 @@ config :web_qa, WebQa.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch"]]
 
 # Watch static and templates for browser reloading.
-config :web_qa, WebQa.Endpoint,
+config :web_qa_vote, WebQaVote.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
@@ -27,9 +27,9 @@ config :web_qa, WebQa.Endpoint,
 config :logger, :console, format: "[$level] $message\n"
 
 # Configure your database
-config :web_qa, WebQa.Repo,
+config :web_qa_vote, WebQaVote.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "phoenix_psql",
   password: "phoenix",
-  database: "web_qa_dev",
+  database: "web_qa_vote_dev",
   size: 10 # The amount of database connections in the pool
