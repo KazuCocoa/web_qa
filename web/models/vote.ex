@@ -23,6 +23,7 @@ defmodule WebQa.Vote do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_number(:count, [greater_than: -1, message: "must be greater than %{count}"])
   end
 
   def countup(model) do

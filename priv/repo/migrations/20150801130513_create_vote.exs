@@ -5,7 +5,7 @@ defmodule WebQa.Repo.Migrations.CreateVote do
     create table(:votes) do
       add :question_num, :integer
       add :user, :string
-      add :count, :integer, default: 0
+      add :count, :integer, [default: 0, null: false]
 
       timestamps
     end

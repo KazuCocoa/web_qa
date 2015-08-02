@@ -39,7 +39,8 @@ defmodule WebQa.VoteControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    vote = Repo.insert! %Vote{}
+    vote = Vote.changeset(%Vote{}, @valid_attrs)
+           |> Repo.insert!
     conn = get conn, vote_path(conn, :show, vote)
     assert html_response(conn, 200) =~ "Show vote"
   end
@@ -51,26 +52,30 @@ defmodule WebQa.VoteControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    vote = Repo.insert! %Vote{}
+    vote = Vote.changeset(%Vote{}, @valid_attrs)
+           |> Repo.insert!
     conn = get conn, vote_path(conn, :edit, vote)
     assert html_response(conn, 200) =~ "Edit vote"
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    vote = Repo.insert! %Vote{}
-    conn = put conn, vote_path(conn, :update, vote), vote: @valid_attrs
+    vote = Vote.changeset(%Vote{}, @valid_attrs)
+           |> Repo.insert!
+   conn = put conn, vote_path(conn, :update, vote), vote: @valid_attrs
     assert redirected_to(conn) == vote_path(conn, :show, vote)
     assert Repo.get_by(Vote, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    vote = Repo.insert! %Vote{}
+    vote = Vote.changeset(%Vote{}, @valid_attrs)
+           |> Repo.insert!
     conn = put conn, vote_path(conn, :update, vote), vote: @invalid_attrs
-    assert html_response(conn, 200) =~ "Edit vote"
+    assert redirected_to(conn) == vote_path(conn, :show, vote)
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    vote = Repo.insert! %Vote{}
+    vote = Vote.changeset(%Vote{}, @valid_attrs)
+           |> Repo.insert!
     conn = delete conn, vote_path(conn, :delete, vote)
     assert redirected_to(conn) == vote_path(conn, :index)
     refute Repo.get(Vote, vote.id)
