@@ -32,12 +32,12 @@ defmodule WebQa.Mixfile do
     [
       {:comeonin, "~>1.0.5"},
       {:phoenix, "~> 0.15"},
-      {:phoenix_ecto, "~> 0.8"},
-      {:postgrex, ">= 0.8.4"},
+      {:phoenix_ecto, "~> 0.8.0"},
+      {:postgrex, ">= 0.9.1"},
       {:phoenix_html, "~> 1.4"},
       {:phoenix_live_reload, "~> 0.5", only: :dev},
       {:cowboy, "~> 1.0"},
-      {:guardian, "~> 0.4.0"}
+      {:guardian, "~> 0.4.0"},
     ]
   end
 end
