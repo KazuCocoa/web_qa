@@ -4,6 +4,14 @@ WebQa application is used at webqa meeting.
 This web app works on https://web-qa.herokuapp.com/
 Allowd developer can deploy this repository on the above heroku.
 
+
+# Feature
+
+- Admin
+  - Create/Read/Update/Delete vote and user resources.
+- Others
+  - Can vote for created users.
+
 # Development
 ## Env
 - Erlang 18.0
