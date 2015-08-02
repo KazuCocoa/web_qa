@@ -19,9 +19,11 @@
 
       <td class="text-right">
         <%= button("Vote", to: vote_path(@conn, :countup_vote, vote), method: "post", class: "btn btn-default btn-xs") %>
-        <%= link "Show", to: vote_path(@conn, :show, vote), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: vote_path(@conn, :edit, vote), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: vote_path(@conn, :delete, vote), method: :delete, class: "btn btn-danger btn-xs" %>
+        <%= if Guardian.Plug.current_resource(@conn) do %>
+          <%= link "Show", to: vote_path(@conn, :show, vote), class: "btn btn-default btn-xs" %>
+          <%= link "Edit", to: vote_path(@conn, :edit, vote), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: vote_path(@conn, :delete, vote), method: :delete, class: "btn btn-danger btn-xs" %>
+        <% end %>
       </td>
     </tr>
 <% end %>
