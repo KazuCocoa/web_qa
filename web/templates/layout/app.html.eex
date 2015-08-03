@@ -35,6 +35,7 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script>require("web/static/js/app")</script>
 
+    <%= if Guardian.Plug.current_resource(@conn) do %>
     <hr>
     <br>
     <div class='panel panel-default col-sm-6' id='guardian-data'>
@@ -54,5 +55,6 @@
       <ul class='list-unstyled' id='ping-output'></ul>
       </dl>
     </div>
+    <% end %>
   </body>
 </html>
