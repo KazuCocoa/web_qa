@@ -14,9 +14,21 @@ defmodule WebQaVote.UserController do
     render(conn, "index.html", users: users)
   end
 
-  def new(conn, _params) do
+
+  def new(conn, _params), do: render_new(conn, Guardian.Plug.current_resource(conn))
+
+  defp render_new(conn, session) when session != nil do
     changeset = User.create_changeset(%User{})
     render(conn, "new.html", changeset: changeset)
+  end
+
+  defp render_new(conn, session) when is_nil(session) do
+    if User.has_admin? do
+      redirect(conn, to: user_path(conn, :index))
+    else
+      changeset = User.create_changeset(%User{})
+      render(conn, "new.html", changeset: changeset)
+    end
   end
 
   def create(conn, %{"user" => user_params}) do

@@ -20,6 +20,12 @@ defmodule WebQaVote.UserControllerTest do
     assert html_response(conn, 200) =~ "New user"
   end
 
+  test "renders index for new resources if have admin", %{conn: conn} do
+    Repo.insert! %User{}
+    conn = get conn, user_path(conn, :new)
+    assert redirected_to(conn) == user_path(conn, :index)
+  end
+
   test "creates resource and redirects when data is valid", %{conn: conn} do
     conn = post conn, user_path(conn, :create), user: @valid_attrs
     assert redirected_to(conn) == user_path(conn, :index)
