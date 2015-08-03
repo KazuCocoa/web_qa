@@ -20,4 +20,16 @@ defmodule WebQaVote.UserTest do
     changeset = User.create_changeset(%User{}, @valid_attrs)
     # assert {:message, "Already anyone use same email."} in errors_on(%Device{}, attrs)
   end
+
+  test "should true if User have a user" do
+    User.create_changeset(%User{}, @valid_attrs)
+    |> Repo.insert!
+    assert User.has_admin?
+  end
+
+  test "should false if User have no user" do
+    refute User.has_admin?
+  end
+
+
 end

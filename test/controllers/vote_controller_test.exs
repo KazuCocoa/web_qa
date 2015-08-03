@@ -19,7 +19,7 @@ defmodule WebQaVote.VoteControllerTest do
     target = Vote.changeset(%Vote{}, @valid_attrs)
            |> Repo.insert!
     conn = post conn, vote_path(conn, :countup_vote, target.id), vote: target
-    assert html_response(conn, 200) =~ "Login"
+    assert redirected_to(conn) == vote_path(conn, :index)
   end
 
   test "renders form for new resources", %{conn: conn} do
