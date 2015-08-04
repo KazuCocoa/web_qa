@@ -7,12 +7,13 @@ defmodule WebQaVote.Vote do
     field :question_num, :integer
     field :user, :string
     field :count, :integer
+    field :is_locked, :boolean
 
     timestamps
   end
 
   @required_fields ~w(question_num user count)
-  @optional_fields ~w()
+  @optional_fields ~w(is_locked)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -28,5 +29,16 @@ defmodule WebQaVote.Vote do
 
   def countup(model) do
     Repo.update! %{model | count: model.count + 1}
+  end
+
+  def lock do
+    vote = from(p in WebQaVote.Vote, where: p.is_locked == false)
+           |> Repo.all
+    case vote do
+      [] ->
+        Repo.update_all(WebQaVote.Vote, set: [is_locked: false])
+      _ ->
+        Repo.update_all(WebQaVote.Vote, set: [is_locked: true])
+    end
   end
 end

@@ -33,7 +33,7 @@ defmodule WebQaVote.Router do
 
     resources "/votes", VoteController
     post "/votes/:id/vote", VoteController, :countup_vote
-
+    post "/votes/:id/lock", VoteController, :lock_vote
   end
 
   # Other scopes may use custom stacks.

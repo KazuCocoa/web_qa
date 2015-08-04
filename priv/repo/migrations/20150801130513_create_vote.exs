@@ -6,6 +6,7 @@ defmodule WebQaVote.Repo.Migrations.CreateVote do
       add :question_num, :integer
       add :user, :string
       add :count, :integer, [default: 0, null: false]
+      add :is_locked, :boolean, default: true
 
       timestamps
     end

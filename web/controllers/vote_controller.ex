@@ -16,9 +16,25 @@ defmodule WebQaVote.VoteController do
 
   def countup_vote(conn, %{"id" => id}) do
     vote = Repo.get!(Vote, id)
-           |> Vote.countup
+    case vote.is_locked do
+      false ->
+        Vote.countup(vote)
+        conn
+        |> put_flash(:info, "Voting to #{vote.user} successfuly")
+        |> redirect(to: vote_path(conn, :index))
+      _ ->
+        conn
+        |> put_flash(:info, "Voting to #{vote.user} is locked")
+        |> redirect(to: vote_path(conn, :index))
+    end
+  end
+
+  def lock_vote(conn, %{"id" => id}) do
+    Vote.lock
+    vote = Repo.get!(Vote, id)
+
     conn
-    |> put_flash(:info, "Voting to #{vote.user} successfuly")
+    |> put_flash(:info, "Lock is #{vote.is_locked}")
     |> redirect(to: vote_path(conn, :index))
   end
 

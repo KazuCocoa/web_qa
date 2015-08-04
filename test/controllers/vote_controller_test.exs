@@ -22,6 +22,13 @@ defmodule WebQaVote.VoteControllerTest do
     assert redirected_to(conn) == vote_path(conn, :index)
   end
 
+  test "redirect to index when access to lock by anomymous", %{conn: conn} do
+    target = Vote.changeset(%Vote{}, @valid_attrs)
+           |> Repo.insert!
+    conn = post conn, vote_path(conn, :lock_vote, target.id), vote: target
+    assert html_response(conn, 200) =~ "Login"
+  end
+
   test "renders form for new resources", %{conn: conn} do
     conn = get conn, vote_path(conn, :new)
     assert html_response(conn, 200) =~ "Login"
