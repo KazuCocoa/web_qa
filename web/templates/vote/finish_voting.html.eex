@@ -1,0 +1,10 @@
+<h2>Finish voting</h2>
+
+<ul>
+  <li>
+    <strong>You vote</strong>
+    <%= @vote.user %>
+  </li>
+</ul>
+
+<%= link "Back", to: vote_path(@conn, :index) %>

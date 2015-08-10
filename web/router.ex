@@ -34,6 +34,7 @@ defmodule WebQaVote.Router do
 
     resources "/votes", VoteController
     post "/votes/:id/vote", VoteController, :countup_vote
+    get "/votes/:id/vote/finish", VoteController, :finish_voting
     post "/votes/:id/lock", VoteController, :lock_vote
   end
 

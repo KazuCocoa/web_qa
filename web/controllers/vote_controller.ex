@@ -21,12 +21,19 @@ defmodule WebQaVote.VoteController do
         Vote.countup(vote)
         conn
         |> put_flash(:info, "Voting to #{vote.user} successfuly")
-        |> redirect(to: vote_path(conn, :index))
+        |> finish_voting(vote)
+        # |> redirect(to: vote_path(conn, :finish_vote, vote))
       _ ->
         conn
         |> put_flash(:info, "Voting to #{vote.user} is locked")
         |> redirect(to: vote_path(conn, :index))
     end
+  end
+
+  def finish_voting(conn, vote) do
+    conn
+    |> render("finish_voting.html", vote: vote)
+    # |> redirect(to: vote_path(conn, :finish_voting), vote: vote)
   end
 
   def lock_vote(conn, %{"id" => id}) do
