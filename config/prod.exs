@@ -33,7 +33,7 @@ config :web_qa_vote, WebQaVote.Endpoint,
 # disk for the key and cert.
 
 # Do not print debug messages in production
-config :logger, level: :info
+config :logger, level: :warn
 
 # ## Using releases
 #
