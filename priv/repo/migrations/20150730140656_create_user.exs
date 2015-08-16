@@ -12,7 +12,7 @@ defmodule WebQaVote.Repo.Migrations.CreateUser do
 
       timestamps
     end
-    create index(:users, [:email])
+    create unique_index(:users, [:email])
 
   end
 end

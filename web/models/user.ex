@@ -30,13 +30,13 @@ defmodule WebQaVote.User do
   def create_changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields)
-    |> validate_unique(:email, [on: Repo, message: "Already anyone use same email."])
+    |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
 
   def update_changeset(model, params \\ :empty) do
     model
     |> cast(params, ~w(), @required_fields)
-    |> validate_unique(:email, [on: Repo, message: "Already anyone use same email."])
+    |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
 
   def login_changeset(model), do: model |> cast(%{}, ~w(), @login_field)

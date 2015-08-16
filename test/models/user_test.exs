@@ -17,8 +17,10 @@ defmodule WebQaVote.UserTest do
   end
 
   test "should email is unique" do
-    changeset = User.create_changeset(%User{}, @valid_attrs)
-    # assert {:message, "Already anyone use same email."} in errors_on(%Device{}, attrs)
+    User.create_changeset(%User{}, @valid_attrs)
+    |> Repo.insert!
+    {:error, changeset} = Repo.insert User.create_changeset(%User{}, @valid_attrs)
+    assert changeset.errors == [email: "Already anyone use same email."]
   end
 
   test "should true if User have a user" do

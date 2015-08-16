@@ -35,12 +35,15 @@ defmodule WebQaVote.UserController do
     changeset = User.create_changeset(%User{}, user_params)
 
     if changeset.valid? do
-      user = Repo.insert!(changeset)
-
-      conn
-      |> put_flash(:info, "User created successfully.")
-      |> Guardian.Plug.sign_in(user, :token, perms: %{ default: Guardian.Permissions.max })
-      |> redirect(to: user_path(conn, :index))
+      case Repo.insert(changeset) do
+        {:ok, user} ->
+          conn
+          |> put_flash(:info, "User created successfully.")
+          |> Guardian.Plug.sign_in(user, :token, perms: %{ default: Guardian.Permissions.max })
+          |> redirect(to: user_path(conn, :index))
+        {:error, changeset} ->
+          render(conn, "new.html", changeset: changeset)
+      end
     else
       render(conn, "new.html", changeset: changeset)
     end
@@ -62,11 +65,15 @@ defmodule WebQaVote.UserController do
     changeset = User.update_changeset(user, user_params)
 
     if changeset.valid? do
-      Repo.update!(changeset)
-
-      conn
-      |> put_flash(:info, "User updated successfully.")
-      |> redirect(to: user_path(conn, :index))
+      case Repo.update(changeset) do
+        {:ok, user} ->
+          conn
+          |> put_flash(:info, "User updated successfully.")
+          |> redirect(to: user_path(conn, :index))
+        {:error, changeset} ->
+          put_flash(conn, :error, "failed to update")
+          |> render("edit.html", user: user, changeset: changeset)
+      end
     else
       put_flash(conn, :error, "failed to update")
       |> render("edit.html", user: user, changeset: changeset)
