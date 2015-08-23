@@ -10,10 +10,10 @@ addons:
 sudo: false
 
 before_script:
-  - psql -c 'create database web_qa_vote_test;' -U phoenix_psql
+  - psql -c 'create database web_qa_vote_travis_test;' -U postgres
+  - cp config/travis.exs config/test.exs
   - mix local.hex --force
-  - mix deps.get -- only test
-  - mix ecto.create, ecto.migrate
+  - MIX_ENV=test mix do deps.get, deps.compile, ecto.create, ecto.migrate
 
 script:
   - mix test

@@ -1,5 +1,7 @@
 **This repository is unofficial**
 
+[![Build Status](https://travis-ci.org/KazuCocoa/web_qa_vote.svg?branch=master)](https://travis-ci.org/KazuCocoa/web_qa_vote)
+
 # WebQaVote
 WebQaVote is voting system against meetups.
 
