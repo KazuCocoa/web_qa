@@ -1,0 +1,20 @@
+language: elixir
+opt_release:
+  - 18
+elixir:
+  - 1.0.5
+
+addons:
+  postgresql: "9.4"
+
+sudo: false
+
+before_script:
+  - psql -c 'create database web_qa_vote_test;' -U phoenix_psql
+  - mix local.hex --force
+  - mix deps.get -- only test
+  - mix ecto.create, ecto.migrate
+
+script:
+  - mix test
+
