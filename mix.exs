@@ -37,7 +37,7 @@ defmodule WebQaVote.Mixfile do
       {:phoenix_html, "~> 2.1"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
-      {:guardian, "~> 0.5"},
+      {:guardian, "~> 0.6"},
     ]
   end
 end
