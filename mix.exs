@@ -30,7 +30,7 @@ defmodule WebQaVote.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [
-      {:comeonin, "~>1.0.5"},
+      {:comeonin, "~>1.1.4"},
       {:phoenix, "~> 1.0"},
       {:phoenix_ecto, "~> 1.1"},
       {:postgrex, ">= 0.9.1"},
