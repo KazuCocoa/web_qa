@@ -3,7 +3,7 @@ opt_release:
   - 18
 elixir:
   - 1.0.5
-  - 1.0.0
+  - 1.1.0
 
 addons:
   postgresql: "9.4"
