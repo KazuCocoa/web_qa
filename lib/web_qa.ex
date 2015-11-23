@@ -10,7 +10,7 @@ defmodule WebQaVote do
       # Start the endpoint when the application starts
       supervisor(WebQaVote.Endpoint, []),
       # Start the Ecto repository
-      worker(WebQaVote.Repo, []),
+      supervisor(WebQaVote.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(WebQaVote.Worker, [arg1, arg2, arg3]),
     ]
