@@ -18,7 +18,7 @@ Allowed developer can deploy this repository on the above heroku.
 # Development
 ## Env
 - Erlang 18.0
-- Elixir 1.0.5
+- Elixir 1.1.0
     - read: `web_qa_vote/blob/master/elixir_buildpack.config`
 
 ## Dev env
