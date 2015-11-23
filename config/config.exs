@@ -23,9 +23,6 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
-# for guardian
-config :joken, config_module: Guardian.JWT
-
 config :guardian, Guardian,
   issuer: "WebQaVote",
   ttl: { 30, :days },
