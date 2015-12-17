@@ -31,13 +31,13 @@ defmodule WebQaVote.Mixfile do
   defp deps do
     [
       {:comeonin, "~>1.1.4"},
-      {:phoenix, "~> 1.0"},
-      {:phoenix_ecto, "~> 1.1"},
-      {:postgrex, ">= 0.9.1"},
-      {:phoenix_html, "~> 2.1"},
+      {:phoenix, "~> 1.1"},
+      {:phoenix_ecto, "~> 2.0"},
+      {:postgrex, "~> 0.10"},
+      {:phoenix_html, "~> 2.3"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
-      {:guardian, "~> 0.7"},
+      {:guardian, "~> 0.7.0"},
     ]
   end
 end

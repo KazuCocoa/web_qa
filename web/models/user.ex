@@ -19,9 +19,6 @@ defmodule WebQaVote.User do
 
   @login_field ~w(email password)
 
-  before_insert :maybe_update_password
-  before_update :maybe_update_password
-
   def from_email(nil), do: { :error, :not_found }
   def from_email(email) do
     Repo.one(User, email: email)
@@ -30,12 +27,14 @@ defmodule WebQaVote.User do
   def create_changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields)
+    |> maybe_update_password
     |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
 
   def update_changeset(model, params \\ :empty) do
     model
     |> cast(params, ~w(), @required_fields)
+    |> maybe_update_password
     |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
 
