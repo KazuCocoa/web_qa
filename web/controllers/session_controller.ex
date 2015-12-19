@@ -44,6 +44,10 @@ defmodule WebQaVote.SessionController do
     end
   end
 
+  def unauthenticated(conn, params) do
+    new(conn, params)
+  end
+
   def forbidden_api(conn, _) do
     conn
     |> put_status(403)

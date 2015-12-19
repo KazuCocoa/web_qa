@@ -4,8 +4,8 @@ defmodule WebQaVote.UserController do
   alias WebQaVote.User
   alias WebQaVote.SessionController
 
-  plug Guardian.Plug.EnsureAuthenticated, %{ on_failure: { SessionController, :new } } when not action in [:new, :create]
-  plug Guardian.Plug.EnsurePermissions, %{ on_failure: { __MODULE__, :forbidden }, default: [:write_profile] } when action in [:edit, :update]
+  plug Guardian.Plug.EnsureAuthenticated, %{ handler: WebQaVote.SessionController } when not action in [:new, :create]
+  plug Guardian.Plug.EnsurePermissions, %{ handler: UserController, default: [:write_profile] } when action in [:edit, :update]
 
   plug :scrub_params, "user" when action in [:create, :update]
 
