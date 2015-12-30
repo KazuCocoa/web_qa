@@ -45,6 +45,8 @@ defmodule WebQaVote.Web do
 
       # Import URL helpers from the router
       import WebQaVote.Router.Helpers
+      import WebQaVote.ErrorHelpers
+      import WebQaVote.Gettext
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML

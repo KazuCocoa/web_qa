@@ -6,7 +6,7 @@ defmodule WebQaVote.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix] ++ Mix.compilers,
+     compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -17,7 +17,7 @@ defmodule WebQaVote.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {WebQaVote, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin]]
   end
 
@@ -38,6 +38,7 @@ defmodule WebQaVote.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
       {:guardian, "~> 0.8.0"},
+      {:gettext, "~> 0.9"}
     ]
   end
 end
