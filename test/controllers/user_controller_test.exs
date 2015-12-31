@@ -5,6 +5,11 @@ defmodule WebQaVote.UserControllerTest do
   @valid_attrs %{is_deleted: true, email: "m@example.com", name: "some content", password: "some content", permission: 1}
   @invalid_attrs %{}
 
+  setup do
+    Gettext.put_locale(WebQaVote.Gettext, "en")
+    :ok
+  end
+
   test "Display login page on index", %{conn: conn} do
     conn = get conn, user_path(conn, :index)
     assert html_response(conn, 200) =~ "Login"

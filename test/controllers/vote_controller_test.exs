@@ -5,6 +5,11 @@ defmodule WebQaVote.VoteControllerTest do
   @valid_attrs %{count: 42, question_num: 42, user: "some content"}
   @invalid_attrs %{}
 
+  setup do
+    Gettext.put_locale(WebQaVote.Gettext, "en")
+    :ok
+  end
+
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, vote_path(conn, :index)
     assert html_response(conn, 200) =~ "Login"
