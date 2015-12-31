@@ -20,10 +20,10 @@
         <ul class="nav nav-pills pull-right">
           <%= if Guardian.Plug.current_resource(@conn) do %>
             <li class="btn"><%= Guardian.Plug.current_resource(@conn).email %></li>
-            <li><%= link("Logout", to: logout_path(@conn, :delete)) %></li>
+            <li><%= link( gettext("Logout"), to: logout_path(@conn, :delete)) %></li>
           <% else %>
-            <li><%= link("Signup", to: user_path(@conn, :new)) %></li>
-            <li><%= link("Login", to: login_path(@conn, :create)) %></li>
+            <li><%= link( gettext("Signup"), to: user_path(@conn, :new)) %></li>
+            <li><%= link( gettext("Login"), to: login_path(@conn, :create)) %></li>
           <% end %>
         </ul>
         <span class="logo"></span>

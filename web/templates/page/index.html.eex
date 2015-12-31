@@ -1,5 +1,5 @@
 <div class="card-panel jumbotron">
-  <h2>Welcome to Web QA</h2>
+  <h2><%= gettext "Welcome to Web QA" %></h2>
 </div>
 
 <div class="row marketing">

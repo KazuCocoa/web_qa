@@ -14,6 +14,9 @@ config :web_qa_vote, WebQaVote.Endpoint,
   pubsub: [name: WebQaVote.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :web_qa_vote, WebQaVote.Gettext,
+  default_locale: "jp"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
