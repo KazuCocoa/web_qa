@@ -12,7 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :web_qa_vote, WebQaVote.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "phoenix_psql",
+  username: "phoenix",
   password: "phoenix",
   database: "web_qa_vote_test",
   pool: Ecto.Adapters.SQL.Sandbox, # Use a sandbox for transactional testing

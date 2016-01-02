@@ -28,7 +28,9 @@ defmodule WebQaVote.Vote do
   end
 
   def countup(model) do
-    Repo.update! %{model | count: model.count + 1}
+    change(model)
+    |> put_change(:count, model.count + 1)
+    |> Repo.insert_or_update!
   end
 
   def lock do

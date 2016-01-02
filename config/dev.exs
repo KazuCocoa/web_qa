@@ -29,7 +29,7 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :web_qa_vote, WebQaVote.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "phoenix_psql",
+  username: "phoenix",
   password: "phoenix",
   database: "web_qa_vote_dev",
   size: 10 # The amount of database connections in the pool
