@@ -1,8 +1,7 @@
 defmodule WebQaVote.SessionController do
   use WebQaVote.Web, :controller
 
-  alias WebQaVote.User
-  alias WebQaVote.UserQuery
+  alias WebQaVote.{User, UserQuery}
 
   plug :scrub_params, "user" when action in [:create]
 
