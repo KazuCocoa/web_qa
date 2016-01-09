@@ -31,7 +31,7 @@ defmodule WebQaVote.Mixfile do
   defp deps do
     [
       {:comeonin, "~>1.1.4"},
-      {:phoenix, "~> 1.1"},
+      {:phoenix, "~> 1.1.2"},
       {:phoenix_ecto, "~> 2.0"},
       {:postgrex, "~> 0.10"},
       {:phoenix_html, "~> 2.3"},
