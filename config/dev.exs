@@ -23,9 +23,6 @@ config :web_qa_vote, WebQaVote.Endpoint,
     ]
   ]
 
-# Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
-
 # Configure your database
 config :web_qa_vote, WebQaVote.Repo,
   adapter: Ecto.Adapters.Postgres,

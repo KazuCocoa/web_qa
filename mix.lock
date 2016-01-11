@@ -13,6 +13,7 @@
   "guardian": {:hex, :guardian, "0.8.0"},
   "joken": {:hex, :joken, "0.15.0"},
   "jose": {:hex, :jose, "1.4.2"},
+  "logger_file_backend": {:hex, :logger_file_backend, "0.0.6"},
   "phoenix": {:hex, :phoenix, "1.1.2"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "2.0.0"},
   "phoenix_html": {:hex, :phoenix_html, "2.3.1"},

@@ -32,9 +32,6 @@ config :web_qa_vote, WebQaVote.Endpoint,
 # Where those two env variables point to a file on
 # disk for the key and cert.
 
-# Do not print debug messages in production
-config :logger, level: :warn
-
 # ## Using releases
 #
 # If you are doing OTP releases, you need to instruct Phoenix
