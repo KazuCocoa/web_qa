@@ -26,7 +26,7 @@ defmodule WebQaVote.User do
 
   def create_changeset(model, params \\ :empty) do
     model
-    |> cast(params, @required_fields)
+    |> cast(params, @required_fields, ~w())
     |> maybe_update_password
     |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
