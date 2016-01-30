@@ -38,6 +38,10 @@ defmodule WebQaVote.Router do
     post "/votes/:id/lock", VoteController, :lock_vote
   end
 
+  scope "/", WebQaVote do
+    get "/hello/revision", HelloController, :revision
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", WebQaVote do
   #   pipe_through :api

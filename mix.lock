@@ -25,5 +25,6 @@
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.11.0"},
   "ranch": {:hex, :ranch, "1.2.1"},
+  "revision_plate_ex": {:hex, :revision_plate_ex, "0.1.0"},
   "tzdata": {:hex, :tzdata, "0.1.7"},
   "uuid": {:hex, :uuid, "1.1.3"}}
