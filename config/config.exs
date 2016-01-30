@@ -18,19 +18,9 @@ config :web_qa_vote, WebQaVote.Gettext,
   default_locale: "jp"
 
 # Configures Elixir's Logger
-#config :logger, :console,
-config :logger,
+config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id],
-  backends: [{LoggerFileBackend, :error}, {LoggerFileBackend, :info}]
-
-config :logger, :info,
-  path: "#{Mix.Project.build_path}/log/info.log",
-  level: :info
-
-config :logger, :error,
-  path: "#{Mix.Project.build_path}/log/error.log",
-  level: :error
+  metadata: [:request_id]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
@@ -45,3 +35,6 @@ config :guardian, Guardian,
   permissions: %{
     default: [:read_profile, :write_profile]
   }
+
+config :phoenix, :template_engines,
+  haml: PhoenixHaml.Engine

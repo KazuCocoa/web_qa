@@ -17,9 +17,9 @@ config :web_qa_vote, WebQaVote.Endpoint,
 config :web_qa_vote, WebQaVote.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{web/templates/.*(eex|haml)$}
     ]
   ]
 

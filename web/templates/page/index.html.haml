@@ -1,0 +1,5 @@
+%div{class: "card-panel jumbotron"}
+  %h2= gettext "Welcome to Web QA"
+%div{class: "row marketing"}
+  %div{class: "col-lg-6"}
+    %h3= link "Let's go to page of voting !!", to: vote_path(@conn, :index), class: "btn btn-default"

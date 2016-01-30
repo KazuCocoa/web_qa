@@ -17,6 +17,19 @@ config :web_qa_vote, WebQaVote.Endpoint,
   cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
+config :logger,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id],
+  backends: [{LoggerFileBackend, :error}, {LoggerFileBackend, :info}]
+
+config :logger, :info,
+  path: "#{Mix.Project.build_path}/log/info.log",
+  level: :info
+
+config :logger, :error,
+  path: "#{Mix.Project.build_path}/log/error.log",
+  level: :error
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
