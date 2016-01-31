@@ -16,15 +16,17 @@ defmodule WebQaVote.VoteControllerTest do
   end
 
   test "lists all entries on index after voting", %{conn: conn} do
-    target = Vote.changeset(%Vote{}, @valid_attrs)
-           |> Repo.insert!
+    target = %Vote{}
+             |> Vote.changeset(@valid_attrs)
+             |> Repo.insert!
     conn = post conn, vote_path(conn, :countup_vote, target.id), vote: target
     assert redirected_to(conn) == vote_path(conn, :index)
   end
 
   test "redirect to index when access to lock by anomymous", %{conn: conn} do
-    target = Vote.changeset(%Vote{}, @valid_attrs)
-           |> Repo.insert!
+    target = %Vote{}
+             |> Vote.changeset(@valid_attrs)
+             |> Repo.insert!
     conn = post conn, vote_path(conn, :lock_vote, target.id), vote: target
     assert html_response(conn, 200) =~ "Login"
   end
@@ -46,7 +48,8 @@ defmodule WebQaVote.VoteControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    vote = Vote.changeset(%Vote{}, @valid_attrs)
+    vote = %Vote{}
+           |> Vote.changeset(@valid_attrs)
            |> Repo.insert!
     conn = get conn, vote_path(conn, :show, vote)
     assert html_response(conn, 200) =~ "Login"
@@ -66,14 +69,16 @@ defmodule WebQaVote.VoteControllerTest do
 
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    vote = Vote.changeset(%Vote{}, @valid_attrs)
+    vote = %Vote{}
+           |> Vote.changeset(@valid_attrs)
            |> Repo.insert!
     conn = get conn, vote_path(conn, :edit, vote)
     assert html_response(conn, 200) =~ "Login"
   end
 
   test "can't updates chosen resource and redirects when data is valid", %{conn: conn} do
-    vote = Vote.changeset(%Vote{}, @valid_attrs)
+    vote = %Vote{}
+           |> Vote.changeset(@valid_attrs)
            |> Repo.insert!
    conn = put conn, vote_path(conn, :update, vote), vote: @valid_attrs
     assert html_response(conn, 200) =~ "Login"
@@ -81,14 +86,16 @@ defmodule WebQaVote.VoteControllerTest do
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    vote = Vote.changeset(%Vote{}, @valid_attrs)
+    vote = %Vote{}
+           |> Vote.changeset(@valid_attrs)
            |> Repo.insert!
     conn = put conn, vote_path(conn, :update, vote), vote: @invalid_attrs
     assert html_response(conn, 200) =~ "Login"
   end
 
   test "can't deletes chosen resource", %{conn: conn} do
-    vote = Vote.changeset(%Vote{}, @valid_attrs)
+    vote = %Vote{}
+           |> Vote.changeset(@valid_attrs)
            |> Repo.insert!
     conn = delete conn, vote_path(conn, :delete, vote)
     assert html_response(conn, 200) =~ "Login"

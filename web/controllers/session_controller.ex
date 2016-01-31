@@ -1,4 +1,6 @@
 defmodule WebQaVote.SessionController do
+  @moduledoc false
+
   use WebQaVote.Web, :controller
 
   alias WebQaVote.{User, UserQuery}
@@ -23,13 +25,16 @@ defmodule WebQaVote.SessionController do
         render(conn, "new.html", changeset: changeset)
       end
     else
-      changeset = User.login_changeset(%User{}) |> Ecto.Changeset.add_error(:login, "not found")
+      changeset = %User{}
+                  |> User.login_changeset
+                  |> Ecto.Changeset.add_error(:login, "not found")
       render(conn, "new.html", changeset: changeset)
     end
   end
 
   def delete(conn, _params) do
-    Guardian.Plug.sign_out(conn)
+    conn
+    |> Guardian.Plug.sign_out
     |> put_flash(:info, "Logged out successfully.")
     |> redirect(to: "/")
   end

@@ -1,4 +1,6 @@
 defmodule WebQaVote.Vote do
+  @moduledoc false
+
   use WebQaVote.Web, :model
 
   alias WebQaVote.Repo
@@ -28,13 +30,15 @@ defmodule WebQaVote.Vote do
   end
 
   def countup(model) do
-    change(model)
+    model
+    |> change
     |> put_change(:count, model.count + 1)
     |> Repo.insert_or_update!
   end
 
   def lock do
-    vote = from(p in WebQaVote.Vote, where: p.is_locked == false)
+    changeset = from(p in WebQaVote.Vote, where: ^p.is_locked = false)
+    vote = changeset
            |> Repo.all
     case vote do
       [] ->

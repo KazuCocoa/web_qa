@@ -1,4 +1,6 @@
 defmodule WebQaVote.ErrorView do
+  @moduledoc false
+
   use WebQaVote.Web, :view
 
   def render("404.html", _assigns) do

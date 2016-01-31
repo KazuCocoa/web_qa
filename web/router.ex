@@ -1,4 +1,6 @@
 defmodule WebQaVote.Router do
+  @moduledoc false
+
   use WebQaVote.Web, :router
 
   pipeline :browser do

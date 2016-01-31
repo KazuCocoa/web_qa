@@ -1,4 +1,6 @@
 defmodule WebQaVote.Endpoint do
+  @moduledoc false
+
   use Phoenix.Endpoint, otp_app: :web_qa_vote
 
   socket "/socket", WebQaVote.UserSocket
