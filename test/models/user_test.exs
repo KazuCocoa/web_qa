@@ -3,7 +3,8 @@ defmodule WebQaVote.UserTest do
 
   alias WebQaVote.User
 
-  @valid_attrs %{is_deleted: false, encrypted_password: "encrypted_pass", email: "m@example.com", name: "some content", password: "some content", permission: 1}
+  @valid_attrs %{is_deleted: false, encrypted_password: "encrypted_pass",
+                 email: "m@example.com", name: "some content", password: "some content", permission: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
@@ -17,20 +18,22 @@ defmodule WebQaVote.UserTest do
   end
 
   test "should email is unique" do
-    User.create_changeset(%User{}, @valid_attrs)
+    %User{}
+    |> User.create_changeset(@valid_attrs)
     |> Repo.insert!
     {:error, changeset} = Repo.insert User.create_changeset(%User{}, @valid_attrs)
     assert changeset.errors == [email: "Already anyone use same email."]
   end
 
   test "should true if User have a user" do
-    User.create_changeset(%User{}, @valid_attrs)
+    %User{}
+    |> User.create_changeset(@valid_attrs)
     |> Repo.insert!
-    assert User.has_admin?
+    assert User.admin?
   end
 
   test "should false if User have no user" do
-    refute User.has_admin?
+    refute User.admin?
   end
 
 

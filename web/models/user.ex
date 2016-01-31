@@ -1,4 +1,6 @@
 defmodule WebQaVote.User do
+  @moduledoc false
+
   use WebQaVote.Web, :model
 
   alias WebQaVote.Repo
@@ -73,7 +75,7 @@ defmodule WebQaVote.User do
 
   defp password_incorrect_error(changeset), do: Ecto.Changeset.add_error(changeset, :password, "is incorrect")
 
-  def has_admin? do
+  def admin? do
     query = from p in WebQaVote.User, limit: 1
 
     case Repo.one(query) do

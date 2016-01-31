@@ -1,4 +1,6 @@
 defmodule WebQaVote.UserQuery do
+  @moduledoc false
+
   import Ecto.Query
   alias WebQaVote.User
 

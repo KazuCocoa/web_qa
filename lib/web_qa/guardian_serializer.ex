@@ -1,4 +1,6 @@
 defmodule WebQaVote.GuardianSerializer do
+  @moduledoc false
+
   @behaviour Guardian.Serializer
 
   alias WebQaVote.{Repo, User}

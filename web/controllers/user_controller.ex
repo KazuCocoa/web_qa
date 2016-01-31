@@ -1,10 +1,14 @@
 defmodule WebQaVote.UserController do
+  @moduledoc false
+
   use WebQaVote.Web, :controller
 
   alias WebQaVote.{User, SessionController}
 
-  plug Guardian.Plug.EnsureAuthenticated, %{ handler: WebQaVote.SessionController } when not action in [:new, :create]
-  plug Guardian.Plug.EnsurePermissions, %{ handler: UserController, default: [:write_profile] } when action in [:edit, :update]
+  plug Guardian.Plug.EnsureAuthenticated,
+    %{ handler: WebQaVote.SessionController } when not action in [:new, :create]
+  plug Guardian.Plug.EnsurePermissions,
+    %{ handler: UserController, default: [:write_profile] } when action in [:edit, :update]
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -22,7 +26,7 @@ defmodule WebQaVote.UserController do
   end
 
   defp render_new(conn, session) when is_nil(session) do
-    if User.has_admin? do
+    if User.admin? do
       redirect(conn, to: user_path(conn, :index))
     else
       changeset = User.create_changeset(%User{})
@@ -70,11 +74,13 @@ defmodule WebQaVote.UserController do
           |> put_flash(:info, "User updated successfully.")
           |> redirect(to: user_path(conn, :index))
         {:error, changeset} ->
-          put_flash(conn, :error, "failed to update")
+          conn
+          |> put_flash(:error, "failed to update")
           |> render("edit.html", user: user, changeset: changeset)
       end
     else
-      put_flash(conn, :error, "failed to update")
+      conn
+      |> put_flash(:error, "failed to update")
       |> render("edit.html", user: user, changeset: changeset)
     end
   end

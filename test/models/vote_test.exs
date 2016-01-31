@@ -32,7 +32,8 @@ defmodule WebQaVote.VoteTest do
   end
 
   test "countup vote count" do
-    vote = Vote.changeset(%Vote{}, @valid_attrs)
+    vote = %Vote{}
+           |> Vote.changeset(@valid_attrs)
            |> Repo.insert!
            |> Vote.countup
     assert vote.count == 43

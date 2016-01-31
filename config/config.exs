@@ -38,3 +38,12 @@ config :guardian, Guardian,
 
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine
+
+config :dogma,
+  rule_set: Dogma.RuleSet.All,
+  exclude: [
+    ~r(\Anode_modules/)
+  ],
+  override: %{
+    LineLength => [ max_length: 128 ]
+  }
