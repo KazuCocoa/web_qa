@@ -37,7 +37,7 @@ defmodule WebQaVote.Vote do
   end
 
   def lock do
-    changeset = from(p in WebQaVote.Vote, where: ^p.is_locked = false)
+    changeset = from(p in WebQaVote.Vote, where: [is_locked: false])
     vote = changeset
            |> Repo.all
     case vote do
