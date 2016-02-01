@@ -1,0 +1,5 @@
+%h2 Edit user
+
+= render "form.html", changeset: @changeset, action: user_path(@conn, :update, @user)
+- user_path = user_path(@conn, :index)
+  = link "Back", to: user_path

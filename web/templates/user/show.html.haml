@@ -1,0 +1,23 @@
+%h2 Show user
+
+%ul
+  %li
+    %strong Name:
+    = @user.name
+  %li
+    %strong Email:
+    = @user.email
+  %li
+    %strong Password:
+    = @user.password
+  %li
+    %strong Permission:
+    = @user.permission
+  %li
+    %strong Is deleted:
+    = @user.is_deleted
+
+- user_path_edit = user_path(@conn, :edit, @user)
+  = link "Edit", to: user_path_edit
+- user_path_index = user_path(@conn, :index)
+  = link "Back", to: user_path_index
