@@ -1,0 +1,20 @@
+<%= form_for @changeset, @action, fn f -> %>
+  - if @changeset.action do
+    .alert.alert-danger
+      %p Oops, something went wrong! Please check the errors below:
+      %ul
+        - for {attr, message} <- f.errors do
+          %li= humanize(attr)
+            = translate_error(message)
+  .form-group
+    = label f, :question_num, "Question num"
+    = number_input f, :question_num, class: "form-control"
+  .form-group
+    = label f, :user, "User"
+    = text_input f, :user, class: "form-control"
+  .form-group
+    = label f, :count, "Count(default zero)"
+    = number_input f, :count, class: "form-control"
+  .form-group
+    = submit "Submit", class: "btn btn-primary"
+<% end %>

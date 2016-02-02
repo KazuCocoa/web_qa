@@ -1,0 +1,24 @@
+%h2 Listing votes
+%table{class: "table"}
+  %thead
+    %tr
+      %th Question num
+      %th User
+      - if Guardian.Plug.current_resource(@conn) do
+        %th Count
+  %tbody
+  - for vote <- @votes do
+    %tr
+      %td= vote.question_num
+      %td= vote.user
+      - if Guardian.Plug.current_resource(@conn) do
+        %td= vote.count
+      %td{class: "text-right"}
+        = button("Vote", to: vote_path(@conn, :countup_vote, vote), method: "post", class: "btn btn-default btn-xs")
+        - if Guardian.Plug.current_resource(@conn) do
+          = button("Lock", to: vote_path(@conn, :lock_vote, vote), method: "post", class: "btn btn-default btn-xs")
+          = link("Show", to: vote_path(@conn, :show, vote), class: "btn btn-default btn-xs")
+          = link("Edit", to: vote_path(@conn, :edit, vote), class: "btn btn-default btn-xs")
+          = button("Delete", to: vote_path(@conn, :delete, vote), method: :delete, class: "btn btn-danger btn-xs")
+- if Guardian.Plug.current_resource(@conn) do
+  = link "New vote", to: vote_path(@conn, :new)

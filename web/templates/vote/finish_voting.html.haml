@@ -1,0 +1,7 @@
+%h2 Finish voting
+%ul
+  %li
+    %strong You vote
+    = @vote.user
+
+= link "Back", to: vote_path(@conn, :index)

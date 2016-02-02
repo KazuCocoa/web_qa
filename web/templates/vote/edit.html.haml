@@ -1,0 +1,4 @@
+%h2 Edit vote
+
+= render "form.html", changeset: @changeset, action: vote_path(@conn, :update, @vote)
+= link "Back", to: vote_path(@conn, :index)

@@ -1,0 +1,14 @@
+%h2 Show vote
+%ul
+  %li
+    %strong Question num:
+    = @vote.question_num
+  %li
+    %strong User:
+    = @vote.user
+  %li
+    %strong Count:
+    = @vote.count
+
+= link "Edit", to: vote_path(@conn, :edit, @vote)
+= link "Back", to: vote_path(@conn, :index)
