@@ -34,7 +34,7 @@ defmodule WebQaVote.Mixfile do
       {:phoenix, "~> 1.1.3"},
       {:phoenix_ecto, "~> 2.0"},
       {:postgrex, "~> 0.11"},
-      {:phoenix_haml, github: "chrismccord/phoenix_haml"},
+      {:phoenix_haml, github: "KazuCocoa/phoenix_haml", branch: "update_deps"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
       {:guardian, "~> 0.8.0"},
