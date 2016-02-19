@@ -4,6 +4,7 @@ defmodule WebQaVote.Vote do
   use WebQaVote.Web, :model
 
   alias WebQaVote.Repo
+  alias WebQaVote.Vote
 
   schema "votes" do
     field :question_num, :integer
@@ -37,14 +38,14 @@ defmodule WebQaVote.Vote do
   end
 
   def lock do
-    changeset = from(p in WebQaVote.Vote, where: [is_locked: false])
+    changeset = from(p in Vote, where: [is_locked: false])
     vote = changeset
            |> Repo.all
     case vote do
       [] ->
-        Repo.update_all(WebQaVote.Vote, set: [is_locked: false])
+        Repo.update_all(Vote, set: [is_locked: false])
       _ ->
-        Repo.update_all(WebQaVote.Vote, set: [is_locked: true])
+        Repo.update_all(Vote, set: [is_locked: true])
     end
   end
 end

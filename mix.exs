@@ -41,7 +41,7 @@ defmodule WebQaVote.Mixfile do
       {:gettext, "~> 0.9"},
       {:logger_file_backend, "~> 0.0.1"},
       {:revision_plate_ex, "~> 0.1.0"},
-      {:dogma, "~> 0.0", only: [:dev, :test]}
+      {:credo, "~> 0.3", only: [:dev, :test]}
     ]
   end
 end

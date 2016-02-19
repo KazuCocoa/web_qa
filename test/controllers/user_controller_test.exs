@@ -2,11 +2,13 @@ defmodule WebQaVote.UserControllerTest do
   use WebQaVote.ConnCase
 
   alias WebQaVote.User
+  alias WebQaVote.Gettext, as: WebQaVoteGettext
+
   @valid_attrs %{is_deleted: true, email: "m@example.com", name: "some content", password: "some content", permission: 1}
   @invalid_attrs %{}
 
   setup do
-    Gettext.put_locale(WebQaVote.Gettext, "en")
+    Gettext.put_locale(WebQaVoteGettext, "en")
     :ok
   end
 

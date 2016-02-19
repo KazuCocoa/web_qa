@@ -4,10 +4,15 @@ defmodule WebQaVote.UserController do
   use WebQaVote.Web, :controller
 
   alias WebQaVote.{User, SessionController}
+  alias Guardian.Plug.EnsureAuthenticated
+  alias Guardian.Plug.EnsurePermissions
+  alias Guardian.Plug, as: GuardianPlug
 
-  plug Guardian.Plug.EnsureAuthenticated,
-    %{ handler: WebQaVote.SessionController } when not action in [:new, :create]
-  plug Guardian.Plug.EnsurePermissions,
+  alias Guardian.Permissions
+
+  plug EnsureAuthenticated,
+    %{ handler: SessionController } when not action in [:new, :create]
+  plug EnsurePermissions,
     %{ handler: UserController, default: [:write_profile] } when action in [:edit, :update]
 
   plug :scrub_params, "user" when action in [:create, :update]
@@ -18,7 +23,7 @@ defmodule WebQaVote.UserController do
   end
 
 
-  def new(conn, _params), do: render_new(conn, Guardian.Plug.current_resource(conn))
+  def new(conn, _params), do: render_new(conn, GuardianPlug.current_resource(conn))
 
   defp render_new(conn, session) when session != nil do
     changeset = User.create_changeset(%User{})
@@ -42,7 +47,7 @@ defmodule WebQaVote.UserController do
         {:ok, user} ->
           conn
           |> put_flash(:info, "User created successfully.")
-          |> Guardian.Plug.sign_in(user, :token, perms: %{ default: Guardian.Permissions.max })
+          |> GuardianPlug.sign_in(user, :token, perms: %{ default: Permissions.max })
           |> redirect(to: user_path(conn, :index))
         {:error, changeset} ->
           render(conn, "new.html", changeset: changeset)

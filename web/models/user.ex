@@ -4,6 +4,9 @@ defmodule WebQaVote.User do
   use WebQaVote.Web, :model
 
   alias WebQaVote.Repo
+  alias WebQaVote.User
+  alias Ecto.Changeset, as: Changeset
+  alias Comeonin.Bcrypt
 
   schema "users" do
     field :name, :string
@@ -50,33 +53,33 @@ defmodule WebQaVote.User do
 
   def valid_password?(nil, _), do: false
   def valid_password?(_, nil), do: false
-  def valid_password?(password, crypted), do: Comeonin.Bcrypt.checkpw(password, crypted)
+  def valid_password?(password, crypted), do: Bcrypt.checkpw(password, crypted)
 
   defp maybe_update_password(changeset) do
-    case Ecto.Changeset.fetch_change(changeset, :password) do
+    case Changeset.fetch_change(changeset, :password) do
       { :ok, password } ->
         changeset
-        |> Ecto.Changeset.put_change(:encrypted_password, Comeonin.Bcrypt.hashpwsalt(password))
+        |> Changeset.put_change(:encrypted_password, Bcrypt.hashpwsalt(password))
       :error -> changeset
     end
   end
 
   defp validate_password(changeset) do
-    case Ecto.Changeset.get_field(changeset, :encrypted_password) do
+    case Changeset.get_field(changeset, :encrypted_password) do
       nil -> password_incorrect_error(changeset)
       crypted -> validate_password(changeset, crypted)
     end
   end
 
   defp validate_password(changeset, crypted) do
-    password = Ecto.Changeset.get_change(changeset, :password)
+    password = Changeset.get_change(changeset, :password)
     if valid_password?(password, crypted), do: changeset, else: password_incorrect_error(changeset)
   end
 
-  defp password_incorrect_error(changeset), do: Ecto.Changeset.add_error(changeset, :password, "is incorrect")
+  defp password_incorrect_error(changeset), do: Changeset.add_error(changeset, :password, "is incorrect")
 
   def admin? do
-    query = from p in WebQaVote.User, limit: 1
+    query = from p in User, limit: 1
 
     case Repo.one(query) do
       nil -> false

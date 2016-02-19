@@ -3,13 +3,16 @@ defmodule WebQaVote.SessionController do
 
   use WebQaVote.Web, :controller
 
-  alias WebQaVote.{User, UserQuery}
+  alias WebQaVote.{User, UserQuery, SessionView}
+  alias Guardian.Permissions
+  alias Guardian.Plug, as: GuardianPlug
+  alias Ecto.Changeset
 
   plug :scrub_params, "user" when action in [:create]
 
   def new(conn, params) do
     changeset = User.login_changeset(%User{})
-    render(conn, WebQaVote.SessionView, "new.html", changeset: changeset)
+    render(conn, SessionView, "new.html", changeset: changeset)
   end
 
   def create(conn, params = %{}) do
@@ -19,7 +22,7 @@ defmodule WebQaVote.SessionController do
       if changeset.valid? do
         conn
         |> put_flash(:info, "Logged in.")
-        |> Guardian.Plug.sign_in(user, :token, perms: %{ default: Guardian.Permissions.max })
+        |> GuardianPlug.sign_in(user, :token, perms: %{ default: Permissions.max })
         |> redirect(to: user_path(conn, :index))
       else
         render(conn, "new.html", changeset: changeset)
@@ -27,21 +30,21 @@ defmodule WebQaVote.SessionController do
     else
       changeset = %User{}
                   |> User.login_changeset
-                  |> Ecto.Changeset.add_error(:login, "not found")
+                  |> Changeset.add_error(:login, "not found")
       render(conn, "new.html", changeset: changeset)
     end
   end
 
   def delete(conn, _params) do
     conn
-    |> Guardian.Plug.sign_out
+    |> GuardianPlug.sign_out
     |> put_flash(:info, "Logged out successfully.")
     |> redirect(to: "/")
   end
 
   def unauthenticated_api(conn, _params) do
     the_conn = put_status(conn, 401)
-    case Guardian.Plug.claims(conn) do
+    case GuardianPlug.claims(conn) do
       { :error, :no_session } -> json(the_conn, %{ error: "Login required" })
       { :error, reason } -> json(the_conn, %{ error: reason })
       _ -> json(the_conn, %{ error: "Login required" })
