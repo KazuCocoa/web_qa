@@ -5,7 +5,7 @@ defmodule WebQaVote do
 
   alias WebQaVote.Endpoint
   alias WebQaVote.Repo
-  alias WebQaVote.Supervisor
+  alias WebQaVote.Supervisor, as: WebQaVoteSupervisor
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
@@ -23,7 +23,7 @@ defmodule WebQaVote do
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Supervisor]
+    opts = [strategy: :one_for_one, name: WebQaVoteSupervisor]
     Supervisor.start_link(children, opts)
   end
 
