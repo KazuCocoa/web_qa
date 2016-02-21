@@ -34,9 +34,7 @@ defmodule WebQaVote.ConnCase do
   end
 
   setup tags do
-    unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(WebQaVote.Repo, [])
-    end
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(WebQaVote.Repo)
 
     {:ok, conn: Phoenix.ConnTest.conn()}
   end

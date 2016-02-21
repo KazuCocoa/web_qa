@@ -14,3 +14,6 @@ config :web_qa_vote, WebQaVote.Repo,
   database: "web_qa_vote_test",
   pool: Ecto.Adapters.SQL.Sandbox, # Use a sandbox for transactional testing
   size: 1
+
+config :logger, :console,
+  level: :error
