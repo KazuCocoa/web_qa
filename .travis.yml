@@ -13,4 +13,4 @@ sudo: false
 before_script:
   - psql -c 'create database web_qa_vote_travis_test;' -U postgres
   - cp config/travis.exs config/test.exs
-  - MIX_ENV=test mix do deps.get, deps.compile, ecto.create, ecto.migrate
+  - MIX_ENV=test mix do deps.get, deps.compile, ecto.migrate
