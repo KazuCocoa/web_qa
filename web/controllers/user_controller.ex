@@ -26,7 +26,7 @@ defmodule WebQaVote.UserController do
   def new(conn, _params), do: render_new(conn, GuardianPlug.current_resource(conn))
 
   defp render_new(conn, session) when session != nil do
-    changeset = User.create_changeset(%User{})
+    changeset = User.create_changeset(%User{}, :invalid)
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -34,7 +34,7 @@ defmodule WebQaVote.UserController do
     if User.admin? do
       redirect(conn, to: user_path(conn, :index))
     else
-      changeset = User.create_changeset(%User{})
+      changeset = User.create_changeset(%User{}, :invalid)
       render(conn, "new.html", changeset: changeset)
     end
   end
@@ -64,7 +64,7 @@ defmodule WebQaVote.UserController do
 
   def edit(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
-    changeset = User.update_changeset(user)
+    changeset = User.update_changeset(user, :invalid)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
@@ -74,7 +74,7 @@ defmodule WebQaVote.UserController do
 
     if changeset.valid? do
       case Repo.update(changeset) do
-        {:ok, user} ->
+        {:ok, _user} ->
           conn
           |> put_flash(:info, "User updated successfully.")
           |> redirect(to: user_path(conn, :index))

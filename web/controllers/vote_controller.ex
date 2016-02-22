@@ -3,12 +3,12 @@ defmodule WebQaVote.VoteController do
 
   use WebQaVote.Web, :controller
 
-  alias WebQaVote.{Vote, SessionController}
+  alias WebQaVote.{Vote, SessionController, UserController}
 
   plug Guardian.Plug.EnsureAuthenticated,
-    %{ handler: WebQaVote.SessionController } when not action in [:index, :countup_vote]
+    %{ handler: SessionController } when not action in [:index, :countup_vote]
   plug Guardian.Plug.EnsurePermissions,
-    %{ handler: WebQaVote.UserController, default: [:write_profile] } when action in [:new, :create, :edit, :update]
+    %{ handler: UserController, default: [:write_profile] } when action in [:new, :create, :edit, :update]
 
   plug :scrub_params, "vote" when action in [:create, :update]
 
@@ -49,7 +49,7 @@ defmodule WebQaVote.VoteController do
   end
 
   def new(conn, _params) do
-    changeset = Vote.changeset(%Vote{})
+    changeset = Vote.changeset(%Vote{}, :invalid)
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -73,7 +73,7 @@ defmodule WebQaVote.VoteController do
 
   def edit(conn, %{"id" => id}) do
     vote = Repo.get!(Vote, id)
-    changeset = Vote.changeset(vote)
+    changeset = Vote.changeset(vote, :invalid)
     render(conn, "edit.html", vote: vote, changeset: changeset)
   end
 

@@ -18,7 +18,9 @@ defmodule WebQaVote.Web do
 
   def model do
     quote do
-      use Ecto.Model
+      use Ecto.Schema
+      import Ecto.Changeset
+      import Ecto.Query, only: [from: 2]
     end
   end
 
@@ -28,7 +30,7 @@ defmodule WebQaVote.Web do
 
       # Alias the data repository and import query/model functions
       alias WebQaVote.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router
@@ -65,7 +67,7 @@ defmodule WebQaVote.Web do
 
       # Alias the data repository and import query/model functions
       alias WebQaVote.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
     end

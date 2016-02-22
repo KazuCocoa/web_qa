@@ -19,35 +19,37 @@ defmodule WebQaVote.User do
     timestamps
   end
 
-  @required_fields ~w(name email password)
-  @optional_fields ~w(is_deleted permission)
+  @allowed ~w(name email password)
 
-  @login_field ~w(email password)
+  @login_allowd ~w(email password)
 
   def from_email(nil), do: { :error, :not_found }
   def from_email(email) do
-    Repo.one(User, email: email)
+    User
+    |> Repo.first(email: email)
   end
 
-  def create_changeset(model, params \\ :empty) do
+  def create_changeset(model, params) do
     model
-    |> cast(params, @required_fields, ~w())
+    |> cast(params, @allowed)
+    |> validate_required([:name, :email, :password])
     |> maybe_update_password
     |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
 
-  def update_changeset(model, params \\ :empty) do
+  def update_changeset(model, params) do
     model
-    |> cast(params, ~w(), @required_fields)
+    |> cast(params, @allowed)
     |> maybe_update_password
     |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
 
-  def login_changeset(model), do: model |> cast(%{}, ~w(), @login_field)
+  def login_changeset(model), do: model |> cast(%{}, @login_allowd)
 
   def login_changeset(model, params) do
     model
-    |> cast(params, @login_field, ~w())
+    |> cast(params, @login_allowd)
+    |> validate_required([:email, :password])
     |> validate_password
   end
 
@@ -79,9 +81,7 @@ defmodule WebQaVote.User do
   defp password_incorrect_error(changeset), do: Changeset.add_error(changeset, :password, "is incorrect")
 
   def admin? do
-    query = from p in User, limit: 1
-
-    case Repo.one(query) do
+    case User |> Repo.first do
       nil -> false
       _ -> true
     end

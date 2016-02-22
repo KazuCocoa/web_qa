@@ -10,15 +10,18 @@ defmodule WebQaVote.SessionController do
 
   plug :scrub_params, "user" when action in [:create]
 
-  def new(conn, params) do
+  def new(conn, _params) do
     changeset = User.login_changeset(%User{})
     render(conn, SessionView, "new.html", changeset: changeset)
   end
 
   def create(conn, params = %{}) do
-    user = Repo.one(UserQuery.by_email(params["user"]["email"] || ""))
+    user = UserQuery.by_email(params["user"]["email"] || "")
+           |> Repo.first
     if user do
       changeset = User.login_changeset(user, params["user"])
+      |> IO.inspect
+
       if changeset.valid? do
         conn
         |> put_flash(:info, "Logged in.")

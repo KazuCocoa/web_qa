@@ -4,7 +4,7 @@ defmodule WebQaVote.UserControllerTest do
   alias WebQaVote.User
   alias WebQaVote.Gettext, as: WebQaVoteGettext
 
-  @valid_attrs %{is_deleted: true, email: "m@example.com", name: "some content", password: "some content", permission: 1}
+  @valid_attrs %{is_deleted: true, email: "m@example.com", name: "some content", password: "somecontent", permission: 1}
   @invalid_attrs %{}
 
   setup do
