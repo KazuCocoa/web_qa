@@ -29,7 +29,7 @@ defmodule WebQaVote.User do
     |> Repo.first(email: email)
   end
 
-  def create_changeset(model, params) do
+  def create_changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed)
     |> validate_required([:name, :email, :password])
@@ -37,7 +37,7 @@ defmodule WebQaVote.User do
     |> unique_constraint(:email, [message: "Already anyone use same email."])
   end
 
-  def update_changeset(model, params) do
+  def update_changeset(model, params \\ %{}) do
     model
     |> cast(params, @allowed)
     |> maybe_update_password

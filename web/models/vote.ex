@@ -23,7 +23,7 @@ defmodule WebQaVote.Vote do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @alloed)
     |> validate_required([:question_num, :user, :count])
