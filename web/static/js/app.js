@@ -6,8 +6,11 @@ import {Socket} from "phoenix"
 // chan.join().receive("ok", chan => {
 //   console.log("Success!")
 // })
+import React from "react"
+import ReactDOM from "react-dom"
+import HelloReact from "./react_example"
 
-let App = {
-}
-
-export default App
+ReactDOM.render(
+  <HelloReact/>,
+  document.getElementById("react-example")
+);

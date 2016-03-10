@@ -27,8 +27,6 @@
 
     - static_path = static_path(@conn, "/js/app.js")
       %script{type: "text/javascript", src: "#{static_path}"}
-    - static_path = static_path(@conn, "/js/materialize.js")
-      %script{type: "text/javascript", src: "#{static_path}"}
     <script>require("web/static/js/app")</script>
 
     - if Guardian.Plug.current_resource(@conn) do

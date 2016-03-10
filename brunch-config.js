@@ -2,8 +2,7 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: 'js/app.js',
-      joinTo: 'js/materialize.js'
+      joinTo: 'js/app.js'
       // To use a separate vendor.js bundle, specify two files path
       // https://github.com/brunch/brunch/blob/stable/docs/config.md#files
       // joinTo: {
@@ -48,8 +47,27 @@ exports.config = {
   // Configure your plugins
   plugins: {
     babel: {
+      presets: ["es2015", "react"],
       // Do not use ES6 compiler in vendor code
       ignore: [/^(web\/static\/vendor)/]
     }
+  },
+
+  modules: {
+    autoRequire: {
+      "js/app.js": ["web/static/js/app"]
+    }
+  },
+
+  npm: {
+    enabled: true,
+    // Whitelist the npm deps to be pulled in as front-end assets.
+    // All other deps in package.json will be excluded from the bundle.
+    whitelist: [
+      "phoenix",
+      "phoenix_html",
+      "react",
+      "react-dom"
+    ]
   }
 };
