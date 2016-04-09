@@ -58,11 +58,12 @@ defmodule WebQaVote.User do
   def valid_password?(password, crypted), do: Bcrypt.checkpw(password, crypted)
 
   # this is just for trial.
+  # Link: https://hexdocs.pm/ecto/Ecto.Query.API.html
   # Example: search_user_with_email_ilike("m%"), then return list of insensitive results.
   def search_user_with_email_ilike(email) do
-    query = from user in User,
-              where: ilike(user.email, ^email)
-    Repo.all query |> IO.inspect
+    from(user in User, where: ilike(user.email, ^email))
+    |> Repo.all
+    |> IO.inspect
   end
 
   defp maybe_update_password(changeset) do
