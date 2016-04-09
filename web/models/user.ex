@@ -57,6 +57,14 @@ defmodule WebQaVote.User do
   def valid_password?(_, nil), do: false
   def valid_password?(password, crypted), do: Bcrypt.checkpw(password, crypted)
 
+  # this is just for trial.
+  # Example: search_user_with_email_ilike("m%"), then return list of insensitive results.
+  def search_user_with_email_ilike(email) do
+    query = from user in User,
+              where: ilike(user.email, ^email)
+    Repo.all query |> IO.inspect
+  end
+
   defp maybe_update_password(changeset) do
     case Changeset.fetch_change(changeset, :password) do
       { :ok, password } ->
