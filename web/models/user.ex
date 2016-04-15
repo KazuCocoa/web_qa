@@ -24,10 +24,7 @@ defmodule WebQaVote.User do
   @login_allowd ~w(email password)
 
   def from_email(nil), do: { :error, :not_found }
-  def from_email(email) do
-    User
-    |> Repo.first(email: email)
-  end
+  def from_email(email), do: Repo.first(User, email: email)
 
   def create_changeset(model, params \\ %{}) do
     model
@@ -90,7 +87,7 @@ defmodule WebQaVote.User do
   defp password_incorrect_error(changeset), do: Changeset.add_error(changeset, :password, "is incorrect")
 
   def admin? do
-    case User |> Repo.first do
+    case Repo.first(User) do
       nil -> false
       _ -> true
     end
