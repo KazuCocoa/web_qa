@@ -50,12 +50,20 @@ defmodule WebQaVote.UserController do
           |> GuardianPlug.sign_in(user, :token, perms: %{ default: Permissions.max })
           |> redirect(to: user_path(conn, :index))
         {:error, changeset} ->
-          render(conn, "new.html", changeset: changeset)
+          conflict_creation conn, changeset, Keyword.has_key?(changeset.errors, :email)
       end
     else
       render(conn, "new.html", changeset: changeset)
     end
   end
+
+  # [email: "Already anyone use same email."]
+  defp conflict_creation(conn, changeset, true) do
+    conn
+    |> put_status(409)
+    |> render("new.html", changeset: changeset)
+  end
+  defp conflict_creation(conn, changeset, _), do: render(conn, "new.html", changeset: changeset)
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
