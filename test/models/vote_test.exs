@@ -1,5 +1,5 @@
 defmodule WebQaVote.VoteTest do
-  use WebQaVote.ModelCase
+  use WebQaVote.ModelCase, async: true
 
   alias WebQaVote.Vote
   alias WebQaVote.Repo
@@ -19,16 +19,16 @@ defmodule WebQaVote.VoteTest do
   end
 
   test "should vote count is greter than zero" do
-    refute {:count, {"must be greater than %{count}", [count: 0]}}  in errors_on(%Vote{}, @valid_attrs)
+    refute {:count, {"must be greater than %{count}", [number: 0]}}  in errors_on(%Vote{}, @valid_attrs)
 
     attrs = %{count: 0, question_num: 42, user: "some content"}
-    refute {:count, {"must be greater than %{count}", [count: 0]}} in errors_on(%Vote{}, attrs)
+    refute {:count, {"must be greater than %{count}", [number: 0]}} in errors_on(%Vote{}, attrs)
 
     attrs = %{count: -1, question_num: 42, user: "some content"}
-    assert {:count, {"must be greater than %{count}", [count: -1]}} in errors_on(%Vote{}, attrs)
+    assert {:count, {"must be greater than %{count}", [number: -1]}} in errors_on(%Vote{}, attrs)
 
     attrs = %{count: nil, question_num: 42, user: "some content"}
-    assert {:count, "can't be blank"} in errors_on(%Vote{}, attrs)
+    assert {:count, {"can't be blank", []}} in errors_on(%Vote{}, attrs)
   end
 
   test "countup vote count" do

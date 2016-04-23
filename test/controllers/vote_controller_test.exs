@@ -1,5 +1,5 @@
 defmodule WebQaVote.VoteControllerTest do
-  use WebQaVote.ConnCase
+  use WebQaVote.ConnCase, async: true
 
   alias WebQaVote.Vote
   @valid_attrs %{count: 42, question_num: 42, user: "some content"}

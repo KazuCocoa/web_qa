@@ -1,5 +1,5 @@
 defmodule WebQaVote.UserControllerTest do
-  use WebQaVote.ConnCase
+  use WebQaVote.ConnCase, async: true
 
   alias WebQaVote.User
   alias WebQaVote.Gettext, as: WebQaVoteGettext

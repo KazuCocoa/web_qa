@@ -22,8 +22,10 @@ defmodule WebQaVote.ConnCase do
 
       # Alias the data repository and import query/model functions
       alias WebQaVote.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
+
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
 
       # Import URL helpers from the router
       import WebQaVote.Router.Helpers
@@ -35,6 +37,10 @@ defmodule WebQaVote.ConnCase do
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(WebQaVote.Repo)
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(WebQaVote.Repo, {:shared, self()})
+    end
 
     {:ok, conn: Phoenix.ConnTest.conn()}
   end

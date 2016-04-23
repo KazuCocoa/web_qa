@@ -1,5 +1,5 @@
 defmodule WebQaVote.UserTest do
-  use WebQaVote.ModelCase
+  use WebQaVote.ModelCase, async: true
 
   alias WebQaVote.User
 
@@ -22,7 +22,7 @@ defmodule WebQaVote.UserTest do
     |> User.create_changeset(@valid_attrs)
     |> Repo.insert!
     {:error, changeset} = Repo.insert User.create_changeset(%User{}, @valid_attrs)
-    assert changeset.errors == [email: "Already anyone use same email."]
+    assert changeset.errors == [email: {"Already anyone use same email.", []}]
   end
 
   test "should true if User have a user" do

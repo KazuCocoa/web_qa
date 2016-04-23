@@ -1,5 +1,5 @@
 defmodule WebQaVote.PageControllerTest do
-  use WebQaVote.ConnCase
+  use WebQaVote.ConnCase, async: true
 
   setup do
     Gettext.put_locale(WebQaVote.Gettext, "en")

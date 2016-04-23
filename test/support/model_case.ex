@@ -18,14 +18,20 @@ defmodule WebQaVote.ModelCase do
     quote do
       # Alias the data repository and import query/model functions
       alias WebQaVote.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
+
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
       import WebQaVote.ModelCase
     end
   end
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(WebQaVote.Repo)
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(WebQaVote.Repo, {:shared, self()})
+    end
 
     :ok
   end

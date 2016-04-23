@@ -22,9 +22,10 @@ defmodule WebQaVote.ChannelCase do
 
       # Alias the data repository and import query/model functions
       alias WebQaVote.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
 
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
 
       # The default endpoint for testing
       @endpoint WebQaVote.Endpoint
@@ -33,6 +34,10 @@ defmodule WebQaVote.ChannelCase do
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(WebQaVote.Repo)
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(WebQaVote.Repo, {:shared, self()})
+    end
 
     :ok
   end
