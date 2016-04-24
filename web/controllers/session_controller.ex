@@ -17,7 +17,8 @@ defmodule WebQaVote.SessionController do
 
   def create(conn, params = %{}) do
     user = UserQuery.by_email(params["user"]["email"] || "")
-           |> Repo.first
+           |> Ecto.Query.first
+           |> Repo.one
     if user do
       changeset = User.login_changeset(user, params["user"])
       |> IO.inspect
