@@ -42,6 +42,6 @@ defmodule WebQaVote.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(WebQaVote.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.conn()}
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

@@ -18,8 +18,8 @@ defmodule WebQaVote.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {WebQaVote, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
+                    :logger, :gettext, :phoenix_ecto, :postgrex, :comeonin]]
   end
 
   defp aliases do
@@ -38,10 +38,11 @@ defmodule WebQaVote.Mixfile do
   defp deps do
     [
       {:comeonin, "~>2.1.1"},
-      {:phoenix, "~> 1.1.3"},
+      {:phoenix, "~> 1.2.0-rc"},
       {:phoenix_ecto, "~> 3.0-rc"},
+      {:phoenix_pubsub, "~> 1.0.0-rc"},
       {:postgrex, "~> 0.11"},
-      {:phoenix_haml, "~> 0.2"},
+      {:phoenix_haml, github: "KazuCocoa/phoenix_haml", branch: "update_deps"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
       {:guardian, "~> 0.10.0"},
