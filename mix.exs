@@ -37,7 +37,7 @@ defmodule WebQaVote.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [
-      {:comeonin, "~>2.1.1"},
+      {:comeonin, "~>2.4.0"},
       {:phoenix, "~> 1.2.0-rc"},
       {:phoenix_ecto, "~> 3.0-rc"},
       {:phoenix_pubsub, "~> 1.0.0-rc"},
