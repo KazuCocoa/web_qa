@@ -42,26 +42,28 @@ defmodule WebQaVote.UserController do
   def create(conn, %{"user" => user_params}) do
     changeset = User.create_changeset(%User{}, user_params)
 
-    if changeset.valid? do
-      case Repo.insert(changeset) do
-        {:ok, user} ->
-          conn
-          |> put_flash(:info, "User created successfully.")
-          |> GuardianPlug.sign_in(user, :token, perms: %{ default: Permissions.max })
-          |> redirect(to: user_path(conn, :index))
-        {:error, changeset} ->
-          conflict_creation conn, changeset, Keyword.has_key?(changeset.errors, :email)
-      end
-    else
-      render(conn, "new.html", changeset: changeset)
+    case Repo.insert(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "User created successfully.")
+        |> GuardianPlug.sign_in(user, :token, perms: %{ default: Permissions.max })
+        |> redirect(to: user_path(conn, :index))
+      {:error, changeset} ->
+        conflict_creation conn, changeset, Keyword.has_key?(changeset.errors, :email)
     end
   end
 
   # [email: "Already anyone use same email."]
   defp conflict_creation(conn, changeset, true) do
-    conn
-    |> put_status(409)
-    |> render("new.html", changeset: changeset)
+    case Keyword.get(changeset.errors, :email) do
+      {"Already anyone use same email.", []} ->
+        conn
+        |> put_status(409)
+        |> render("new.html", changeset: changeset)
+      _ ->
+        conn
+        |> render("new.html", changeset: changeset)
+    end
   end
   defp conflict_creation(conn, changeset, _), do: render(conn, "new.html", changeset: changeset)
 
@@ -80,21 +82,15 @@ defmodule WebQaVote.UserController do
     user = Repo.get!(User, id)
     changeset = User.update_changeset(user, user_params)
 
-    if changeset.valid? do
-      case Repo.update(changeset) do
-        {:ok, _user} ->
-          conn
-          |> put_flash(:info, "User updated successfully.")
-          |> redirect(to: user_path(conn, :index))
-        {:error, changeset} ->
-          conn
-          |> put_flash(:error, "failed to update")
-          |> render("edit.html", user: user, changeset: changeset)
-      end
-    else
-      conn
-      |> put_flash(:error, "failed to update")
-      |> render("edit.html", user: user, changeset: changeset)
+    case Repo.update(changeset) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "User updated successfully.")
+        |> redirect(to: user_path(conn, :index))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "failed to update")
+        |> render("edit.html", user: user, changeset: changeset)
     end
   end
 
