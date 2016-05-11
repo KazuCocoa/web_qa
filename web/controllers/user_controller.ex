@@ -108,4 +108,12 @@ defmodule WebQaVote.UserController do
     |> put_flash(:error, "Forbidden")
     |> redirect(to: user_path(conn, :index))
   end
+
+  def search_email(conn, %{"search" => %{"query" => query}}) do
+    result = User.search_user_with_email_ilike query <> "%"
+
+    users = Repo.all(User)
+
+    render(conn, "search_index.html", users: users, assigns: result)
+  end
 end

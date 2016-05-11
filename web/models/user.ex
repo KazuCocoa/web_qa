@@ -60,7 +60,6 @@ defmodule WebQaVote.User do
   def search_user_with_email_ilike(email) do
     from(user in User, where: ilike(user.email, ^email))
     |> Repo.all
-    |> IO.inspect
   end
 
   defp maybe_update_password(changeset) do

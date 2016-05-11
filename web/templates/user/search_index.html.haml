@@ -7,7 +7,7 @@
   = text_input f, :query
   = submit "Search"
 
-%h2 Listing users
+%h2 searched users
 %table{class: "table"}
   %thead
     %tr
@@ -17,7 +17,7 @@
       %th Permission
       %th Is deleted
   %tbody
-  - for user <- @users do
+  - for user <- @assigns do
     %tr
       %td
         %a{onclick: "sample('<%= user.name %>')"}= user.name
