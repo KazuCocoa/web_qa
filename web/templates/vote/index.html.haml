@@ -1,5 +1,13 @@
+%script
+  function toggleTable() {
+    var toggle = document.getElementById("voting-table");
+    toggle.style.display = (toggle.style.display == "table") ? "none" : "table";
+  }
+
 %h2 Listing votes
-%table{class: "table"}
+%a{class: "btn btn-primary dropdown-toggle", onclick: "toggleTable();" ,href: "#", data-toggle: "dropdown"} show list
+
+%table{class: "table", style="display: none;", id: "voting-table"}
   %thead
     %tr
       %th Question num
