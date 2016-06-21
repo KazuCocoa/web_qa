@@ -18,7 +18,7 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && d
 RUN curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 RUN apt-get update && apt-get install -y nodejs esl-erlang=1:18.2
 
-RUN curl -L -O https://github.com/elixir-lang/elixir/releases/download/v1.2.0/Precompiled.zip && \
+RUN curl -L -O https://github.com/elixir-lang/elixir/releases/download/v1.3.0/Precompiled.zip && \
     unzip Precompiled.zip && \
     rm -f Precompiled.zip && \
     ln -s /elixir/bin/elixirc /usr/local/bin/elixirc && \

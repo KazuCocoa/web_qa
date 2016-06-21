@@ -56,13 +56,12 @@ defmodule WebQaVote.VoteController do
   def create(conn, %{"vote" => vote_params}) do
     changeset = Vote.changeset(%Vote{}, vote_params)
 
-    case Repo.insert(changeset) do
-      {:ok, _vote} ->
-        conn
-        |> put_flash(:info, "Vote created successfully.")
-        |> redirect(to: vote_path(conn, :index))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+    with {:ok, _vote} <- Repo.insert(changeset) do
+      conn
+      |> put_flash(:info, "Vote created successfully.")
+      |> redirect(to: vote_path(conn, :index))
+    else
+      {:error, changeset} -> render(conn, "new.html", changeset: changeset)
     end
   end
 
@@ -81,13 +80,12 @@ defmodule WebQaVote.VoteController do
     vote = Repo.get!(Vote, id)
     changeset = Vote.changeset(vote, vote_params)
 
-    case Repo.update(changeset) do
-      {:ok, vote} ->
-        conn
-        |> put_flash(:info, "Vote updated successfully.")
-        |> redirect(to: vote_path(conn, :show, vote))
-      {:error, changeset} ->
-        render(conn, "edit.html", vote: vote, changeset: changeset)
+    with {:ok, vote} <- Repo.update(changeset) do
+      conn
+      |> put_flash(:info, "Vote updated successfully.")
+      |> redirect(to: vote_path(conn, :show, vote))
+    else
+      {:error, changeset} -> render(conn, "edit.html", vote: vote, changeset: changeset)
     end
   end
 

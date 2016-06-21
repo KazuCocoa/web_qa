@@ -42,12 +42,12 @@ defmodule WebQaVote.UserController do
   def create(conn, %{"user" => user_params}) do
     changeset = User.create_changeset(%User{}, user_params)
 
-    case Repo.insert(changeset) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "User created successfully.")
-        |> GuardianPlug.sign_in(user, :token, perms: %{ default: Permissions.max })
-        |> redirect(to: user_path(conn, :index))
+    with {:ok, user} <- Repo.insert(changeset) do
+      conn
+      |> put_flash(:info, "User created successfully.")
+      |> GuardianPlug.sign_in(user, :token, perms: %{ default: Permissions.max })
+      |> redirect(to: user_path(conn, :index))
+    else
       {:error, changeset} ->
         conflict_creation conn, changeset, Keyword.has_key?(changeset.errors, :email)
     end
@@ -82,11 +82,11 @@ defmodule WebQaVote.UserController do
     user = Repo.get!(User, id)
     changeset = User.update_changeset(user, user_params)
 
-    case Repo.update(changeset) do
-      {:ok, _user} ->
-        conn
-        |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: user_path(conn, :index))
+    with {:ok, _user} <- Repo.update(changeset) do
+      conn
+      |> put_flash(:info, "User updated successfully.")
+      |> redirect(to: user_path(conn, :index))
+    else
       {:error, changeset} ->
         conn
         |> put_flash(:error, "failed to update")
