@@ -38,9 +38,9 @@ defmodule WebQaVote.Mixfile do
   defp deps do
     [
       {:comeonin, "~>2.4.0"},
-      {:phoenix, "~> 1.2.0-rc"},
+      {:phoenix, "~> 1.2.0"},
       {:phoenix_ecto, "~> 3.0"},
-      {:phoenix_pubsub, "~> 1.0.0-rc"},
+      {:phoenix_pubsub, "~> 1.0.0"},
       {:postgrex, "~> 0.11.2"},
       {:phoenix_haml, github: "KazuCocoa/phoenix_haml", branch: "update_deps"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
