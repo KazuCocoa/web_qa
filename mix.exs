@@ -24,7 +24,7 @@ defmodule WebQaVote.Mixfile do
 
   defp aliases do
     [
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      "test": ["ecto.create --quiet", "ecto.migrate", "test --stale"]
     ]
   end
 
