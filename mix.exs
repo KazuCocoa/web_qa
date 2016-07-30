@@ -37,7 +37,7 @@ defmodule WebQaVote.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [
-      {:comeonin, "~>2.4.0"},
+      {:comeonin, "~>2.5"},
       {:phoenix, "~> 1.2.0"},
       {:phoenix_ecto, "~> 3.0"},
       {:phoenix_pubsub, "~> 1.0.0"},
@@ -45,7 +45,7 @@ defmodule WebQaVote.Mixfile do
       {:phoenix_haml, github: "KazuCocoa/phoenix_haml", branch: "update_deps"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
-      {:guardian, "~> 0.10.0"},
+      {:guardian, "~> 0.12"},
       {:gettext, "~> 0.11"},
       {:logger_file_backend, "~> 0.0.1"},
       {:revision_plate_ex, "~> 0.1.0"},
