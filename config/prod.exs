@@ -62,3 +62,6 @@ config :web_qa_vote, WebQaVote.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   size: 20 # The amount of database connections in the pool
+
+config :sentry,
+  environment_name: :prod

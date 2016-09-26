@@ -36,3 +36,10 @@ config :guardian, Guardian,
 
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine
+
+config :sentry,
+  dsn: "https://2a43292fbcf24b5485a8d671f7305e72:da064eecf1a34c0ba9c989c135c7d2a1@sentry.io/101378",
+  tags: %{
+    env: "production"
+  },
+  included_environments: ~w(prod)a

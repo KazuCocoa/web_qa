@@ -17,3 +17,7 @@ config :web_qa_vote, WebQaVote.Repo,
 
 config :logger, :console,
   level: :error
+
+config :sentry,
+  environment_name: :test,
+  client: Sentry.TestClient

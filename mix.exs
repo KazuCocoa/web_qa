@@ -19,7 +19,7 @@ defmodule WebQaVote.Mixfile do
   def application do
     [mod: {WebQaVote, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
-                    :logger, :gettext, :phoenix_ecto, :postgrex, :comeonin]]
+                    :sentry, :logger, :gettext, :phoenix_ecto, :postgrex, :comeonin]]
   end
 
   defp aliases do
@@ -49,6 +49,7 @@ defmodule WebQaVote.Mixfile do
       {:gettext, "~> 0.11"},
       {:logger_file_backend, "~> 0.0.1"},
       {:revision_plate_ex, "~> 0.1.0"},
+      {:sentry, "~> 1.0"},
       {:credo, "~> 0.3", only: [:dev, :test]}
     ]
   end

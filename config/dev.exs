@@ -31,3 +31,6 @@ config :web_qa_vote, WebQaVote.Repo,
   password: "phoenix",
   database: "web_qa_vote_dev",
   size: 10 # The amount of database connections in the pool
+
+config :sentry,
+  environment_name: :dev
