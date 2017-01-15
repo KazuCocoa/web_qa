@@ -12,6 +12,7 @@ defmodule WebQaVote.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :set_locale
   end
 
   pipeline :browser_session do
@@ -23,6 +24,11 @@ defmodule WebQaVote.Router do
     plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader, realm: "Bearer"
     plug Guardian.Plug.LoadResource
+  end
+
+  defp set_locale(conn, _opts) do
+    Gettext.put_locale(WebQaVote.Gettext, "jp")
+    conn
   end
 
   scope "/", WebQaVote do
