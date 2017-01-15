@@ -27,7 +27,7 @@ defmodule WebQaVote.Router do
   end
 
   defp set_locale(conn, _opts) do
-    Gettext.put_locale(WebQaVote.Gettext, "jp")
+    Gettext.put_locale(WebQaVote.Gettext, "en")
     conn
   end
 
